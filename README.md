@@ -7,4 +7,4 @@
  
 <strong>Example ( in Main.cpp ):</strong> <br />
 -> Loading CSGO-Interfaces <br />
--> Calling VMT-Methode 'gEngineClient->IsConnected()' <br />
+-> Calling VMT-Methode 'gEngineClient->IsConnected()' and if connected > saying 'CSGO-Extern doing it' <br />

@@ -16,6 +16,9 @@ namespace Memory
         if( remoteThreadHandle == nullptr )
             return false;
 
-        return WaitForSingleObject( remoteThreadHandle, INFINITE ) == WAIT_OBJECT_0;
+        if( WaitForSingleObject( remoteThreadHandle, INFINITE ) != WAIT_OBJECT_0 )
+            return false;
+
+        return CloseHandle( remoteThreadHandle ) != FALSE;
     }
 }

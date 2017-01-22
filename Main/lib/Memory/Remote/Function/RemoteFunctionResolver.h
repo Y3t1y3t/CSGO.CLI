@@ -13,8 +13,7 @@ namespace Memory
     #ifndef _WIN64
         enum class IntelInstructions : byte
         {
-            JMP = 0xE9,
-            INT3 = 0xCC
+            JMP = 0xE9
         };
 
         enum class IntelInstructionsLength : byte
@@ -28,6 +27,10 @@ namespace Memory
     public:
 
         bool Resolve( void* functionPtr, std::vector<byte>& functionBytes ) const;
+
+    private:
+        
+        bool IsAtTheEnd( byte* bytes ) const;
     };
 }
 

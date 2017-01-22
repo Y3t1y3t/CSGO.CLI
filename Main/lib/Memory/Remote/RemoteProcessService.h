@@ -74,7 +74,7 @@ namespace Memory
     template <class T>
     bool RemoteProcessService::Write( LPVOID ptr, const T& in )
     {
-        return WriteProcessMemory( _process.Handle, ptr, in, sizeof( T ), nullptr ) != FALSE;
+        return WriteProcessMemory( _process.Handle, ptr, LPCVOID( &in ), sizeof( T ), nullptr ) != FALSE;
     }
 }
 

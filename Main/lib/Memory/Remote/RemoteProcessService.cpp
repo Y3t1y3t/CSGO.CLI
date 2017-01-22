@@ -68,7 +68,8 @@ namespace Memory
 
     bool RemoteProcessService::IsValid( void )
     {
-        return GetProcessId() == _process.Id;
+        _process.Id = 0;
+        return GetProcessId();
     }
 
     RemoteProcessDto& RemoteProcessService::Get( void )

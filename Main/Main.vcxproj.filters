@@ -15,52 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\CLI\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\D3D\Drawings\Presenters\FontPresenter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\D3D\Drawings\Font.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\D3D\Renderer\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Hooking\Hooks\DetourHook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Hooking\Hooks\VMTHook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Hooking\Managers\HookManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Logging\Logger\Base\LoggerBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Logging\Logger\FileLogger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Math\Types\Vec2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Math\Types\Vec3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Memory\Pattern.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Memory\Read.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Math\Types\Angle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Math\Types\Matrix3x4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\Memory\Remote\RemoteProcessService.cpp">
+    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionExecuter.cpp">
@@ -69,13 +24,19 @@
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionParams.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionResolver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunction.cpp">
+    <ClCompile Include="lib\Memory\Remote\RemoteProcessService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CLI\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\CSGO\Interfaces\Engine\EngineClient.cpp">
@@ -84,81 +45,9 @@
     <ClCompile Include="src\CSGO\Interfaces\Interfaces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionParams.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\D3D\Consts\Colors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\D3D\Consts\Fonts.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\D3D\Drawings\Presenters\Interfaces\IPresenter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\D3D\Drawings\Presenters\FontPresenter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\D3D\Drawings\Font.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\D3D\Includes\D3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\D3D\Renderer\Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Flags\Enum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Hooking\Frames\Interfaces\IHookFrame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Hooking\Hooks\Base\HookBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Hooking\Hooks\DetourHook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Hooking\Hooks\VMTHook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Hooking\Managers\HookManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Hooking\Services\HookService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Logging\Logger\Base\LoggerBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Logging\Logger\FileLogger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Math\Types\Vec2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Math\Types\Vec3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Memory\Pattern.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Memory\Read.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Memory\VMT.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Math\Types\Angle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Math\Types\Matrix3x4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Memory\Remote\RemoteProcessService.h">
+    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionExecuter.h">
@@ -167,31 +56,22 @@
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionResolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunction.h">
+    <ClInclude Include="lib\Memory\Remote\RemoteProcessService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CSGO\Interfaces\Engine\EngineClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CSGO\Interfaces\Interfaces.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionParams.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Memory\SP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Util\Path.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Util\String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

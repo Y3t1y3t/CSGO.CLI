@@ -25,8 +25,12 @@ int main()
     }
 
     while( remoteProcessService->IsValid() ) {
-        std::cout << CSGO::gEngineClient->IsConnected() << std::endl;
+        std::cout << "IsConnected: " << ( CSGO::gEngineClient->IsConnected() ? "true" : "false" ) << std::endl;
         std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
     }
+
+    std::cout << "process closed." << std::endl;
+    system( "pause" );
+
     return 0;
 }

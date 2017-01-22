@@ -153,65 +153,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="lib\D3D\Drawings\Font.cpp" />
-    <ClCompile Include="lib\D3D\Drawings\Presenters\FontPresenter.cpp" />
-    <ClCompile Include="lib\D3D\Renderer\Renderer.cpp" />
-    <ClCompile Include="lib\Hooking\Hooks\DetourHook.cpp" />
-    <ClCompile Include="lib\Hooking\Hooks\VMTHook.cpp" />
-    <ClCompile Include="lib\Hooking\Managers\HookManager.cpp" />
-    <ClCompile Include="lib\Logging\Logger\Base\LoggerBase.cpp" />
-    <ClCompile Include="lib\Logging\Logger\FileLogger.cpp" />
-    <ClCompile Include="lib\Math\Types\Angle.cpp" />
-    <ClCompile Include="lib\Math\Types\Matrix3x4.cpp" />
-    <ClCompile Include="lib\Math\Types\Vec2.cpp" />
-    <ClCompile Include="lib\Math\Types\Vec3.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunction.cpp" />
-    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionParams.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionExecuter.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionFactory.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionParams.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionResolver.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionService.cpp" />
     <ClCompile Include="lib\Memory\Remote\RemoteProcessService.cpp" />
-    <ClCompile Include="lib\Memory\Pattern.cpp" />
-    <ClCompile Include="lib\Memory\Read.cpp" />
     <ClCompile Include="src\CLI\Main.cpp" />
     <ClCompile Include="src\CSGO\Interfaces\Engine\EngineClient.cpp" />
     <ClCompile Include="src\CSGO\Interfaces\Interfaces.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\D3D\Consts\Colors.h" />
-    <ClInclude Include="lib\D3D\Consts\Fonts.h" />
-    <ClInclude Include="lib\D3D\Drawings\Font.h" />
-    <ClInclude Include="lib\D3D\Drawings\Presenters\FontPresenter.h" />
-    <ClInclude Include="lib\D3D\Drawings\Presenters\Interfaces\IPresenter.h" />
-    <ClInclude Include="lib\D3D\Includes\D3D.h" />
-    <ClInclude Include="lib\D3D\Renderer\Renderer.h" />
-    <ClInclude Include="lib\Flags\Enum.h" />
-    <ClInclude Include="lib\Hooking\Frames\Interfaces\IHookFrame.h" />
-    <ClInclude Include="lib\Hooking\Hooks\Base\HookBase.h" />
-    <ClInclude Include="lib\Hooking\Hooks\DetourHook.h" />
-    <ClInclude Include="lib\Hooking\Hooks\VMTHook.h" />
-    <ClInclude Include="lib\Hooking\Managers\HookManager.h" />
-    <ClInclude Include="lib\Hooking\Services\HookService.h" />
-    <ClInclude Include="lib\Logging\Logger\Base\LoggerBase.h" />
-    <ClInclude Include="lib\Logging\Logger\FileLogger.h" />
-    <ClInclude Include="lib\Math\Types\Angle.h" />
-    <ClInclude Include="lib\Math\Types\Matrix3x4.h" />
-    <ClInclude Include="lib\Math\Types\Vec2.h" />
-    <ClInclude Include="lib\Math\Types\Vec3.h" />
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunction.h" />
-    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionParams.h" />
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionExecuter.h" />
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionFactory.h" />
+    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionParams.h" />
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionResolver.h" />
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionService.h" />
     <ClInclude Include="lib\Memory\Remote\RemoteProcessService.h" />
-    <ClInclude Include="lib\Memory\Pattern.h" />
-    <ClInclude Include="lib\Memory\Read.h" />
-    <ClInclude Include="lib\Memory\SP.h" />
-    <ClInclude Include="lib\Memory\VMT.h" />
-    <ClInclude Include="lib\Util\Path.h" />
-    <ClInclude Include="lib\Util\String.h" />
     <ClInclude Include="src\CSGO\Interfaces\Engine\EngineClient.h" />
     <ClInclude Include="src\CSGO\Interfaces\Interfaces.h" />
   </ItemGroup>

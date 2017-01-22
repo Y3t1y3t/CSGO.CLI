@@ -1,11 +1,10 @@
 # CSGO-Extern
-"dynamic" shell-code injection &amp; extrn stuff.
+<strong>"dynamic" shell-code injection &amp; extrn stuff.</strong>
 
-Features:
--> Calling *any* naked function in an another process space
- -> obv. the targeted process needs to know the used functions
+<strong>Features:</strong> <br />
+-> Calling *any* naked function in an another process space <br />
+-> obv. the targeted process needs to know the used functions <br />
  
-Example ( in Main.cpp ):
-
--> Loading CSGO-Interfaces
--> Calling VMT-Methode 'gEngineClient->IsConnected()'
+<strong>Example ( in Main.cpp ):</strong> <br />
+-> Loading CSGO-Interfaces <br />
+-> Calling VMT-Methode 'gEngineClient->IsConnected()' <br />

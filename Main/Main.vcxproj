@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F5524A10-A20B-4E27-82FA-4B88639C35F9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Main</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>CSGO.CLI</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>bin\Debug\</OutDir>
+    <IntDir>bin\$(Configuration)\tmp\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>bin\Release\</OutDir>
+    <IntDir>bin\$(Configuration)\tmp\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;LOGNAME="CSGO.Extern";_CUSTOM_DEBUG;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_NDEBUG;_CONSOLE;LOGNAME="CSGO.Extern";_CUSTOM_DEBUG;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="lib\D3D\Drawings\Font.cpp" />
+    <ClCompile Include="lib\D3D\Drawings\Presenters\FontPresenter.cpp" />
+    <ClCompile Include="lib\D3D\Renderer\Renderer.cpp" />
+    <ClCompile Include="lib\Hooking\Hooks\DetourHook.cpp" />
+    <ClCompile Include="lib\Hooking\Hooks\VMTHook.cpp" />
+    <ClCompile Include="lib\Hooking\Managers\HookManager.cpp" />
+    <ClCompile Include="lib\Logging\Logger\Base\LoggerBase.cpp" />
+    <ClCompile Include="lib\Logging\Logger\FileLogger.cpp" />
+    <ClCompile Include="lib\Math\Types\Angle.cpp" />
+    <ClCompile Include="lib\Math\Types\Matrix3x4.cpp" />
+    <ClCompile Include="lib\Math\Types\Vec2.cpp" />
+    <ClCompile Include="lib\Math\Types\Vec3.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunction.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionParams.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionExecuter.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionFactory.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionResolver.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionService.cpp" />
+    <ClCompile Include="lib\Memory\Remote\RemoteProcessService.cpp" />
+    <ClCompile Include="lib\Memory\Pattern.cpp" />
+    <ClCompile Include="lib\Memory\Read.cpp" />
+    <ClCompile Include="src\CLI\Main.cpp" />
+    <ClCompile Include="src\CSGO\Interfaces\Engine\EngineClient.cpp" />
+    <ClCompile Include="src\CSGO\Interfaces\Interfaces.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lib\D3D\Consts\Colors.h" />
+    <ClInclude Include="lib\D3D\Consts\Fonts.h" />
+    <ClInclude Include="lib\D3D\Drawings\Font.h" />
+    <ClInclude Include="lib\D3D\Drawings\Presenters\FontPresenter.h" />
+    <ClInclude Include="lib\D3D\Drawings\Presenters\Interfaces\IPresenter.h" />
+    <ClInclude Include="lib\D3D\Includes\D3D.h" />
+    <ClInclude Include="lib\D3D\Renderer\Renderer.h" />
+    <ClInclude Include="lib\Flags\Enum.h" />
+    <ClInclude Include="lib\Hooking\Frames\Interfaces\IHookFrame.h" />
+    <ClInclude Include="lib\Hooking\Hooks\Base\HookBase.h" />
+    <ClInclude Include="lib\Hooking\Hooks\DetourHook.h" />
+    <ClInclude Include="lib\Hooking\Hooks\VMTHook.h" />
+    <ClInclude Include="lib\Hooking\Managers\HookManager.h" />
+    <ClInclude Include="lib\Hooking\Services\HookService.h" />
+    <ClInclude Include="lib\Logging\Logger\Base\LoggerBase.h" />
+    <ClInclude Include="lib\Logging\Logger\FileLogger.h" />
+    <ClInclude Include="lib\Math\Types\Angle.h" />
+    <ClInclude Include="lib\Math\Types\Matrix3x4.h" />
+    <ClInclude Include="lib\Math\Types\Vec2.h" />
+    <ClInclude Include="lib\Math\Types\Vec3.h" />
+    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunction.h" />
+    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionParams.h" />
+    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionExecuter.h" />
+    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionFactory.h" />
+    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionResolver.h" />
+    <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionService.h" />
+    <ClInclude Include="lib\Memory\Remote\RemoteProcessService.h" />
+    <ClInclude Include="lib\Memory\Pattern.h" />
+    <ClInclude Include="lib\Memory\Read.h" />
+    <ClInclude Include="lib\Memory\SP.h" />
+    <ClInclude Include="lib\Memory\VMT.h" />
+    <ClInclude Include="lib\Util\Path.h" />
+    <ClInclude Include="lib\Util\String.h" />
+    <ClInclude Include="src\CSGO\Interfaces\Engine\EngineClient.h" />
+    <ClInclude Include="src\CSGO\Interfaces\Interfaces.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

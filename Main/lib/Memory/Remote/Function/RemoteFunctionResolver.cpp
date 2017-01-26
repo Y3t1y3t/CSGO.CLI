@@ -16,9 +16,8 @@ namespace Memory
 
     bool RemoteFunctionResolver::IsAtTheEnd( byte* bytes ) const
     {
-        // _asm retn 1
+        // _asm retn XX
         return bytes[ 0 ] == 0xC2
-            && bytes[ 1 ] == 0x01
             && bytes[ 2 ] == 0x00;
     }
 }

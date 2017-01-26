@@ -33,9 +33,6 @@
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lib\Memory\Remote\RemoteProcessService.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\CLI\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -43,6 +40,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\CSGO\Interfaces\Interfaces.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSGO\Interfaces\Client\Client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Process\RemoteProcessService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Hook\Base\SharedData\RemoteHookSharedDataBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsResolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsTableHook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsTableHookFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSGO\Interfaces\Base\InterfaceBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Hook\VirtualMethodsTable\SharedData\RemoteVirtualMethodsTableHookSharedData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,13 +86,34 @@
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Memory\Remote\RemoteProcessService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\CSGO\Interfaces\Engine\EngineClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CSGO\Interfaces\Interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSGO\Interfaces\Client\Client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Process\RemoteProcessService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Hook\Base\SharedData\RemoteHookSharedDataBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Hook\VirtualMethodsTable\SharedData\RemoteVirtualMethodsTableHookSharedData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsResolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsTableHook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsTableHookFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSGO\Interfaces\Base\InterfaceBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

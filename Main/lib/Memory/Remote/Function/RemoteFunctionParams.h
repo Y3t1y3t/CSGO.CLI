@@ -2,6 +2,7 @@
 #define _MEMORY_REMOTEFUNCTIONPARAMS_H_
 
 #pragma once
+
 #include <windows.h>
 
 namespace Memory
@@ -9,10 +10,8 @@ namespace Memory
     class RemoteFunctionParams
     {
     public:
-        class Imports
+        struct Imports
         {
-        public:
-
             class Kernel32
             {
             public:

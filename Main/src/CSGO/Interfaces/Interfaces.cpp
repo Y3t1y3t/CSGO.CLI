@@ -15,8 +15,14 @@ namespace CSGO
 
         if( !function->GetDataPtrValue( &params ) )
             return false;
-        
-        gEngineClient = std::make_unique<EngineClient>( remoteFunctionService, params.Engine.EngineClient.Instance );
+
+        if( !params.ClientModule.Client.Instance
+            || !params.EngineModule.EngineClient.Instance )
+            return false;
+
+        gClient = std::make_unique<Client>( remoteFunctionService, params.ClientModule.Client.Instance );
+
+        gEngineClient = std::make_unique<EngineClient>( remoteFunctionService, params.EngineModule.EngineClient.Instance );
         return true;
     }
 

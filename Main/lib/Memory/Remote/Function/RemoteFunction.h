@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "../RemoteProcessService.h"
+#include "../Process/RemoteProcessService.h"
 
 namespace Memory
 {

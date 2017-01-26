@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "../../../../lib/Memory/Remote/Function/RemoteFunctionService.h"
+#include "../Base/InterfaceBase.h"
 
 namespace CSGO
 {
@@ -53,18 +53,15 @@ namespace CSGO
         }
     }
 
-    class EngineClient
+    class EngineClient : public InterfaceBase
     {
-        Memory::SharedRemoteFunctionService     _remoteFunctionService;
-        uintptr_t                               _instance;
-
-        /* FUNCTION */
         std::unique_ptr<Memory::RemoteFunction> _isConnected;
         std::unique_ptr<Memory::RemoteFunction> _clientCmdUnrestricted;
 
     public:
 
         EngineClient( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance );
+        ~EngineClient( void ) = default;
 
         bool IsConnected( void );
         void ClientCmdUnrestricted( const char* command, bool wait = false );

@@ -2,9 +2,8 @@
 
 namespace CSGO
 {
-    EngineClient::EngineClient( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance ) :
-        _remoteFunctionService( remoteFunctionService ),
-        _instance( instance )
+    EngineClient::EngineClient( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance ) : 
+        InterfaceBase( remoteFunctionService, instance)
     {
     }
 

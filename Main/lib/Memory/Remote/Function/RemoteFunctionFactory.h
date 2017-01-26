@@ -3,9 +3,9 @@
 
 #pragma once
 
-#include "../RemoteProcessService.h"
-
 #include "RemoteFunction.h"
+
+#include "../Process/RemoteProcessService.h"
 
 namespace Memory
 {

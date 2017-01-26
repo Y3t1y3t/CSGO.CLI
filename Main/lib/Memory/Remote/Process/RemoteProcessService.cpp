@@ -19,6 +19,11 @@ namespace Memory
         Handle = INVALID_HANDLE_VALUE;
     }
 
+    RemoteProcessService::~RemoteProcessService( void )
+    {
+        Detach();
+    }
+
     bool RemoteProcessService::Attach( const RemoteProcessParamsDto& process )
     {
         Detach();
@@ -42,7 +47,7 @@ namespace Memory
         if( _process.Handle != INVALID_HANDLE_VALUE )
             CloseHandle( _process.Handle );
 
-        _process = RemoteProcessDto( {std::string()} );
+        _process = RemoteProcessDto( { std::string() } );
     }
 
     LPVOID RemoteProcessService::AllocRemoteData( const byte* data, size_t size ) const
@@ -56,14 +61,22 @@ namespace Memory
         return remoteData;
     }
 
-    bool RemoteProcessService::DeallocRemoteData(LPVOID entryPoint) const
+    bool RemoteProcessService::DeallocRemoteData( LPVOID entryPoint ) const
     {
         return VirtualFreeEx( _process.Handle, entryPoint, 0, MEM_RELEASE ) != FALSE;
     }
 
-    HANDLE RemoteProcessService::StartRemoteThread(LPVOID entryPoint, LPVOID data) const
+    HANDLE RemoteProcessService::StartRemoteThread( LPVOID entryPoint, LPVOID data ) const
     {
         return CreateRemoteThread( _process.Handle, nullptr, NULL, static_cast< LPTHREAD_START_ROUTINE >( entryPoint ), data, NULL, nullptr );
+    }
+
+    HANDLE RemoteProcessService::ShareHandle( HANDLE handle, DWORD accessRights ) const
+    {
+        HANDLE duplicatedHandle;
+        if( DuplicateHandle( handle, handle, _process.Handle, &duplicatedHandle, accessRights, FALSE, NULL ) != FALSE )
+            return duplicatedHandle;
+        return nullptr;
     }
 
     bool RemoteProcessService::IsValid( void )

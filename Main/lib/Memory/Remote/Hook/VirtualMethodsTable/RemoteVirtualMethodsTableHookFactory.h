@@ -59,8 +59,8 @@ namespace Memory
         auto remoteSharedDataPtr = reinterpret_cast< byte* >( remoteSharedData.get() );
         std::memcpy( remoteSharedDataPtr, &T( virtualMethodsTablePtr, sharedOriginProcessHandle ), sharedDataObjSize );
 
-        auto virtualMethodesPtr = reinterpret_cast< uintptr_t >( remoteSharedDataPtr ) + sharedDataObjSize;
-        std::memcpy( reinterpret_cast< void* >( virtualMethodesPtr ), &virtualMethods.at( 0 ), virtualMethodsSize );
+        auto virtualMethodsPtr = reinterpret_cast< uintptr_t >( remoteSharedDataPtr ) + sharedDataObjSize;
+        std::memcpy( reinterpret_cast< void* >( virtualMethodsPtr ), &virtualMethods.at( 0 ), virtualMethodsSize );
 
         return _remoteProcessService->AllocRemoteData( remoteSharedDataPtr, remoteSharedDataSize );
     }

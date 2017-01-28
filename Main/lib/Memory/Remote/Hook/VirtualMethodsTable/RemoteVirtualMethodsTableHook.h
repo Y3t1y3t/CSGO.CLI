@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "RemoteVirtualMethodHookBase.h"
+
 #include "../../Process/RemoteProcessService.h"
 
 #include <vector>
@@ -31,10 +33,15 @@ namespace Memory
         explicit RemoteVirtualMethodsTableHook( SharedRemoteProcessService remoteProcessService, const uintptr_t& virtualMethodsTablePtr, std::vector<uintptr_t>& virtualMethods, const uintptr_t& sharedDataPtr, const size_t& sharedDataSize );
         ~RemoteVirtualMethodsTableHook( void );
 
-        bool        IsValidSharedDataPtr( void ) const;
+        void        SetTableHook( void ) const;
+        void        RemoveTableHook( void ) const;
 
-        void        SetHook( void ) const;
-        void        RemoveHook( void ) const;
+        template<class T>
+        bool        SetVirtualMethodHook( RemoteVirtualMethodHookBase* virtualMethodHook );
+
+    private:
+
+        bool        IsValidSharedDataPtr( void ) const;
 
         uintptr_t   GetVirtualMethodsPtr( void ) const;
 
@@ -52,6 +59,23 @@ namespace Memory
         template<class T>
         bool        SetSharedDataPtrValue( const T& in );
     };
+
+    template <class T>
+    bool RemoteVirtualMethodsTableHook::SetVirtualMethodHook( RemoteVirtualMethodHookBase* virtualMethodHook )
+    {
+        T sharedData;
+        if( !GetSharedDataPtrValue<T>( &sharedData ) )
+            return false;
+
+        auto virtualMethodData = virtualMethodHook->GetVirtualMethodData( &sharedData );
+        virtualMethodData->Callback = virtualMethodHook->Callback;
+        virtualMethodData->Function = GetVirtualMethodPtr( virtualMethodHook->Index );
+
+        auto virtualMethodPtr = reinterpret_cast< uintptr_t >( virtualMethodHook->RemoteCallback->GetFunctionPtr() );
+        SetVirtualMethodPtr( virtualMethodHook->Index, virtualMethodPtr );
+
+        return SetSharedDataPtrValue( sharedData );
+    }
 
     template <class T>
     bool RemoteVirtualMethodsTableHook::GetSharedDataPtrValue( T* out )

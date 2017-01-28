@@ -8,16 +8,19 @@ namespace Memory
         if( bytes[ 0 ] == byte( IntelInstructions::JMP ) )
             bytes += *reinterpret_cast< intptr_t* >( &bytes[ 1 ] ) + byte( IntelInstructionsLength::JMP );
 
-        for( ; !IsAtTheEnd( bytes - 3 ); ++bytes )
+        for( ; !IsFunctionRet( bytes - 3 ); ++bytes )
             functionBytes.emplace_back( *bytes );
 
         return !functionBytes.empty();
     }
 
-    bool RemoteFunctionResolver::IsAtTheEnd( byte* bytes ) const
+    bool RemoteFunctionResolver::IsFunctionRet( byte* bytes ) const
     {
-        // _asm retn XX
-        return bytes[ 0 ] == 0xC2
-            && bytes[ 2 ] == 0x00;
+        // _asm retn 01 C2 01 XX
+        // _asm INT3    CC
+        // _asm INT3    CC
+        return bytes[ 0 ] == byte( IntelInstructions::RET )
+            && bytes[ 3 ] == byte( IntelInstructions::INT3 )
+            && bytes[ 4 ] == byte( IntelInstructions::INT3 );
     }
 }

@@ -71,7 +71,7 @@ namespace Memory
         return CreateRemoteThread( _process.Handle, nullptr, NULL, static_cast< LPTHREAD_START_ROUTINE >( entryPoint ), data, NULL, nullptr );
     }
 
-    HANDLE RemoteProcessService::ShareHandle( HANDLE handle, DWORD accessRights ) const
+    HANDLE RemoteProcessService::GetSharedHandle( HANDLE handle, DWORD accessRights ) const
     {
         HANDLE duplicatedHandle;
         if( DuplicateHandle( handle, handle, _process.Handle, &duplicatedHandle, accessRights, FALSE, NULL ) != FALSE )

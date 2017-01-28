@@ -12,7 +12,8 @@ namespace CSGO
         class IsConnectedParams
         {
         public:
-            explicit IsConnectedParams( uintptr_t instance ) : Instance( instance ) {}
+            explicit IsConnectedParams( uintptr_t instance ) : 
+                Instance( instance ) {}
 
             uintptr_t   Instance = 0x0;
             bool        Result = false;

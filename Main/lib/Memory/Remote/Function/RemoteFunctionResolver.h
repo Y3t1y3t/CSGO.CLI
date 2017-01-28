@@ -13,7 +13,9 @@ namespace Memory
     #ifndef _WIN64
         enum class IntelInstructions : byte
         {
-            JMP = 0xE9
+            JMP = 0xE9,
+            RET = 0xC2,
+            INT3 = 0xCC
         };
 
         enum class IntelInstructionsLength : byte
@@ -30,7 +32,7 @@ namespace Memory
 
     private:
         
-        bool IsAtTheEnd( byte* bytes ) const;
+        bool IsFunctionRet( byte* bytes ) const;
     };
 }
 

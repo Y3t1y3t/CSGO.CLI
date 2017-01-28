@@ -12,12 +12,19 @@ namespace Memory
     class RemoteVirtualMethodsTableHookSharedData : public RemoteHookSharedDataBase
     {
     public:
+        class VirtualMethodData
+        {
+        public:
+            uintptr_t               Function;
+            LPTHREAD_START_ROUTINE  Callback;
+        };
+
         explicit RemoteVirtualMethodsTableHookSharedData( const uintptr_t& virtualMethodsTablePtr, HANDLE sharedOriginProcessHandle );
         ~RemoteVirtualMethodsTableHookSharedData( void ) = default;
-        
+
         Imports     Imports;
 
-        uintptr_t   VirtualMethodsTablePtr;        
+        uintptr_t   VirtualMethodsTablePtr;
         HANDLE      SharedOriginProcessHandle;
     };
 }

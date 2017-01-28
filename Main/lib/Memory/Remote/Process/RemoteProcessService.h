@@ -53,7 +53,7 @@ namespace Memory
         bool    DeallocRemoteData( LPVOID entryPoint ) const;
 
         HANDLE  StartRemoteThread( LPVOID entryPoint, LPVOID data ) const;
-        HANDLE  ShareHandle( HANDLE handle, DWORD accessRights = PROCESS_REMOTE ) const;
+        HANDLE  GetSharedHandle( HANDLE handle, DWORD accessRights = PROCESS_REMOTE ) const;
 
         template<class T>
         bool    Read( LPCVOID ptr, T* out );

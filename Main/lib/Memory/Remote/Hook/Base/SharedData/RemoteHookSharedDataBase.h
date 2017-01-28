@@ -28,15 +28,6 @@ namespace Memory
                 CloseHandleFn CloseHandle;
             } Kernel32;
         };
-
-    public:
-        
-        class HookBase
-        {
-        public:
-            uintptr_t               Function;
-            LPTHREAD_START_ROUTINE  Callback;
-        };
     };
 }
 

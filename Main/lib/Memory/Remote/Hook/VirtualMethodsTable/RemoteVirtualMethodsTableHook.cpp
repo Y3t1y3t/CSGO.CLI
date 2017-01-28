@@ -19,7 +19,7 @@ namespace Memory
 
     RemoteVirtualMethodsTableHook::~RemoteVirtualMethodsTableHook( void )
     {
-        RemoveHook();
+        RemoveTableHook();
 
         if( IsValidSharedDataPtr() ) {
             _remoteProcessService->DeallocRemoteData( reinterpret_cast< LPVOID >( GetSharedDataPtr() ) );
@@ -27,19 +27,19 @@ namespace Memory
         }
     }
 
-    bool RemoteVirtualMethodsTableHook::IsValidSharedDataPtr( void ) const
-    {
-        return _sharedData.Ptr != 0x0;
-    }
-
-    void RemoteVirtualMethodsTableHook::SetHook( void ) const
+    void RemoteVirtualMethodsTableHook::SetTableHook( void ) const
     {
         _remoteProcessService->Write<uintptr_t>( _virtualMethodsTable.Ptr, GetVirtualMethodsPtr() );
     }
 
-    void RemoteVirtualMethodsTableHook::RemoveHook( void ) const
+    void RemoteVirtualMethodsTableHook::RemoveTableHook( void ) const
     {
         _remoteProcessService->Write<uintptr_t>( _virtualMethodsTable.Ptr, _virtualMethodsTable.PtrValue );
+    }
+
+    bool RemoteVirtualMethodsTableHook::IsValidSharedDataPtr( void ) const
+    {
+        return _sharedData.Ptr != 0x0;
     }
 
     uintptr_t RemoteVirtualMethodsTableHook::GetVirtualMethodsPtr( void ) const

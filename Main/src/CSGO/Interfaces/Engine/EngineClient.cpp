@@ -2,15 +2,37 @@
 
 namespace CSGO
 {
-    EngineClient::EngineClient( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance ) : 
-        InterfaceBase( remoteFunctionService, instance)
+    EngineClient::EngineClient( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance ) :
+        InterfaceBase( remoteFunctionService, instance )
     {
+    }
+
+    DWORD EngineClient::Remote::IsConnected( LPVOID paramsPtr )
+    {
+        if( paramsPtr != nullptr ) {
+            auto params = static_cast< IsConnectedParams* >( paramsPtr );
+
+            typedef bool( __thiscall* IsConnectedFn )( uintptr_t );
+            params->Result = IsConnectedFn( ( *reinterpret_cast< DWORD** >( params->Instance ) )[ 27 ] )( params->Instance );
+        }
+        return 0;
+    }
+
+    DWORD EngineClient::Remote::ClientCmdUnrestricted( LPVOID paramsPtr )
+    {
+        if( paramsPtr != nullptr ) {
+            auto params = static_cast< ClientCmdUnrestrictedParams* >( paramsPtr );
+
+            typedef void( __thiscall* ClientCmdUnrestrictedFn )( uintptr_t, const char*, bool );
+            ClientCmdUnrestrictedFn( ( *reinterpret_cast< DWORD** >( params->Instance ) )[ 114 ] )( params->Instance, params->Command, params->Wait );
+        }
+        return 0;
     }
 
     bool EngineClient::IsConnected( void )
     {
         auto params = Remote::IsConnectedParams( _instance );
-        if( _isConnected == nullptr && !_remoteFunctionService->Create( LPTHREAD_START_ROUTINE( Remote::IsConnected ), &params, sizeof( Remote::IsConnectedParams ), &_isConnected ) )
+        if( _isConnected == nullptr && !_remoteFunctionService->Create( Remote::IsConnected, &params, sizeof( Remote::IsConnectedParams ), &_isConnected ) )
             return false;
 
         if( !_remoteFunctionService->Execute( _isConnected ) )
@@ -25,7 +47,7 @@ namespace CSGO
     {
         auto params = Remote::ClientCmdUnrestrictedParams( _instance, command, wait );
         if( _clientCmdUnrestricted == nullptr
-            && !_remoteFunctionService->Create( LPTHREAD_START_ROUTINE( Remote::ClientCmdUnrestricted ), &params, sizeof( Remote::ClientCmdUnrestrictedParams ), &_clientCmdUnrestricted )
+            && !_remoteFunctionService->Create( Remote::ClientCmdUnrestricted, &params, sizeof( Remote::ClientCmdUnrestrictedParams ), &_clientCmdUnrestricted )
             || !_clientCmdUnrestricted->SetDataPtrValue( params ) )
             return;
 

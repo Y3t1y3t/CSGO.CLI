@@ -3,8 +3,9 @@
 
 #pragma once
 
-#include <vector>
 #include "../../Process/RemoteProcessService.h"
+
+#include <vector>
 
 namespace Memory
 {

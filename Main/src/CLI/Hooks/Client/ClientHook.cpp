@@ -1,24 +1,26 @@
 ﻿#include "ClientHook.h"
+#include "SharedData/ClientHookSharedData.h"
 
 namespace CLI
 {
-    bool ClientHook::OnLoad(
+    ClientHook::ClientHook(
         Memory::SharedRemoteProcessService remoteProcessService,
         Memory::SharedRemoteFunctionService remoteFunctionService,
-        Memory::SharedRemoteHookService remoteHookService,
-        const uintptr_t& instance,
-        const HANDLE& sharedProcessHandle )
+        Memory::SharedRemoteHookService remoteHookService ) :
+        HookBase( remoteProcessService, remoteFunctionService, remoteHookService )
     {
-        if( !remoteHookService->Create<ClientHookSharedData>( instance, sharedProcessHandle, &_hook ) )
+    }
+
+    bool ClientHook::Register( const uintptr_t& instance, const HANDLE& sharedOriginProcessHandle )
+    {
+        if( !_remoteHookService->Create<ClientHookSharedData>( instance, sharedOriginProcessHandle, &_hook ) )
             return false;
 
-        _createMove = std::make_unique<CreateMoveVirtualMethodHook>( remoteProcessService, remoteFunctionService );
+        _createMove = std::make_unique<CreateMoveVirtualMethodHook>( _remoteProcessService, _remoteFunctionService );
         if( !_hook->SetVirtualMethodHook<ClientHookSharedData>( _createMove.get() ) )
             return false;
 
         _hook->SetTableHook();
         return true;
     }
-
-    std::unique_ptr<ClientHook> gClientHook = std::make_unique<ClientHook>();
 }

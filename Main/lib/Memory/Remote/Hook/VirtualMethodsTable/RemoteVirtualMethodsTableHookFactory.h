@@ -57,7 +57,8 @@ namespace Memory
         std::unique_ptr<byte[]> remoteSharedData( new byte[ remoteSharedDataSize ] );
 
         auto remoteSharedDataPtr = reinterpret_cast< byte* >( remoteSharedData.get() );
-        std::memcpy( remoteSharedDataPtr, &T( virtualMethodsTablePtr, sharedOriginProcessHandle ), sharedDataObjSize );
+        auto sharedDataObj = T( virtualMethodsTablePtr, sharedOriginProcessHandle );
+        std::memcpy( remoteSharedDataPtr, &sharedDataObj, sharedDataObjSize );
 
         auto virtualMethodsPtr = reinterpret_cast< uintptr_t >( remoteSharedDataPtr ) + sharedDataObjSize;
         std::memcpy( reinterpret_cast< void* >( virtualMethodsPtr ), &virtualMethods.at( 0 ), virtualMethodsSize );

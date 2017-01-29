@@ -39,9 +39,6 @@
     <ClCompile Include="src\CSGO\Interfaces\Engine\EngineClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\CSGO\Interfaces\Interfaces.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\CSGO\Interfaces\Client\Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -81,6 +78,15 @@
     <ClCompile Include="lib\Memory\Remote\Hook\RemoteHookService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CLI\Hooks\Base\HookBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CLI\Hooks\HooksService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSGO\Interfaces\InterfacesService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunction.h">
@@ -102,9 +108,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CSGO\Interfaces\Engine\EngineClient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CSGO\Interfaces\Interfaces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CSGO\Interfaces\Client\Client.h">
@@ -144,6 +147,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\Memory\Remote\Hook\RemoteHookService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CLI\Hooks\Base\HookBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CLI\Hooks\HooksService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSGO\Interfaces\InterfacesService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

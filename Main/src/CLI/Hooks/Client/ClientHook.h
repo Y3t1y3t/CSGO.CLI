@@ -3,27 +3,28 @@
 
 #pragma once
 
-#include "../../../../lib/Memory/Remote/Hook/RemoteHookService.h"
-
 #include "VirtualMethods/CreateMoveVirtualMethodHook.h"
+
+#include "../Base/HookBase.h"
+
+#include "../../../../lib/Memory/Remote/Hook/RemoteHookService.h"
 
 namespace CLI
 {
-    class ClientHook
+    class ClientHook : public HookBase
     {
-        std::unique_ptr<Memory::RemoteVirtualMethodsTableHook> _hook;
-        std::unique_ptr<CreateMoveVirtualMethodHook> _createMove;
+        std::unique_ptr<Memory::RemoteVirtualMethodsTableHook>  _hook;
+        std::unique_ptr<CreateMoveVirtualMethodHook>            _createMove;
 
     public:
 
-        bool OnLoad( Memory::SharedRemoteProcessService remoteProcessService,
-                     Memory::SharedRemoteFunctionService remoteFunctionService,
-                     Memory::SharedRemoteHookService remoteHookService,
-                     const uintptr_t& instance,
-                     const HANDLE& sharedProcessHandle );
-    };
+        ClientHook( Memory::SharedRemoteProcessService remoteProcessService,
+                    Memory::SharedRemoteFunctionService remoteFunctionService,
+                    Memory::SharedRemoteHookService remoteHookService );
+        ~ClientHook( void ) = default;
 
-    extern std::unique_ptr<ClientHook> gClientHook;
+        bool Register( const uintptr_t& instance, const HANDLE& sharedOriginProcessHandle ) override;
+    };
 }
 
 #endif /* _CLI_CLIENTHOOK_H_ */

@@ -1,5 +1,7 @@
 ﻿#include "CreateMoveVirtualMethodHook.h"
 
+#include "../SharedData/ClientHookSharedData.h"
+
 #include <iostream>
 
 namespace CLI
@@ -28,23 +30,24 @@ namespace CLI
         _self = nullptr;
     }
 
-    DWORD CreateMoveVirtualMethodHook::FunctionCallback( LPVOID paramsPtr )
+    inline DWORD CreateMoveVirtualMethodHook::FunctionCallback( LPVOID paramsPtr )
     {
         if( paramsPtr == nullptr )
-            return -1;
+            return 1;
 
         ClientHookSharedData::CreateMoveVirtualMethod::Parameters params;
         if( !_self->_remoteProcessService->Read( paramsPtr, &params ) )
-            return -2;
+            return 2;
 
         std::cout << "hkCreateMove called. seq: " << params.Number << std::endl;
         return 0;
     }
 
-    void CreateMoveVirtualMethodHook::VirtualMethodCallback( void* ecx, void*, size_t number, float input, bool active )
+#pragma optimize( "", off )   
+    void CreateMoveVirtualMethodHook::VirtualMethodCallback( void* _ecx, void*, size_t number, float input, bool active )
     {
-        if( ecx != nullptr ) {
-            auto sharedData = reinterpret_cast< ClientHookSharedData* >( *reinterpret_cast< uintptr_t* >( ecx ) - sizeof( ClientHookSharedData ) );
+        if( _ecx != nullptr ) {
+            auto sharedData = reinterpret_cast< ClientHookSharedData* >( *reinterpret_cast< uintptr_t* >( _ecx ) - sizeof( ClientHookSharedData ) );
 
             typedef void( __thiscall* CreateMoveFn )( uintptr_t, size_t, float, bool );
             CreateMoveFn( sharedData->CreateMoveData.Function )( sharedData->VirtualMethodsTablePtr, number, input, active );
@@ -61,4 +64,5 @@ namespace CLI
             }
         }
     }
+#pragma optimize( "", on )   
 }

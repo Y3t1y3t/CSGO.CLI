@@ -5,20 +5,16 @@
 
 #include "../Base/InterfaceBase.h"
 
-#include "../../../../lib/Memory/Remote/Hook/VirtualMethodsTable/SharedData/RemoteVirtualMethodsTableHookSharedData.h"
-
 namespace CSGO
 {
-    namespace Remote
-    {
-
-    }
-
     class Client : public InterfaceBase
     {
     public:
-        Client( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance );
-        ~Client( void ) = default;
+        explicit    Client( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance = 0x0 );
+                    ~Client( void ) = default;
+
+        std::string GetModuleName( void ) override          { return "client.dll"; }
+        std::string GetInterfaceVersion( void ) override    { return "VClient018"; }
     };
 
     extern std::unique_ptr<Client> gClient;

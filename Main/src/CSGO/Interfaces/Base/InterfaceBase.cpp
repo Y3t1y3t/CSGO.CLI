@@ -6,15 +6,14 @@ namespace CSGO
         _remoteFunctionService( remoteFunctionService ),
         _instance( instance )
     {
-
     }
 
-    uintptr_t InterfaceBase::GetInstance( void ) const
+    uintptr_t* InterfaceBase::GetInstance( void )
     {
-        return _instance;
+        return &_instance;
     }
 
-    void InterfaceBase::SetInstance( uintptr_t instance )
+    void InterfaceBase::SetInstance(  const uintptr_t& instance )
     {
         _instance = instance;
     }

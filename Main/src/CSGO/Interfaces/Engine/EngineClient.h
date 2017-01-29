@@ -7,53 +7,6 @@
 
 namespace CSGO
 {
-    namespace Remote
-    {
-        class IsConnectedParams
-        {
-        public:
-            explicit IsConnectedParams( uintptr_t instance ) : 
-                Instance( instance ) {}
-
-            uintptr_t   Instance = 0x0;
-            bool        Result = false;
-        };
-
-        inline __declspec( naked ) void IsConnected( IsConnectedParams* params )
-        {
-            if( params != nullptr ) {
-                typedef bool( __thiscall* IsConnectedFn )( uintptr_t );
-                params->Result = IsConnectedFn( ( *reinterpret_cast< DWORD** >( params->Instance ) )[ 27 ] )( params->Instance );
-            }
-            _asm retn 1;
-        }
-
-        class ClientCmdUnrestrictedParams
-        {
-        public:
-            explicit ClientCmdUnrestrictedParams( uintptr_t instance, const char* command, bool wait ) :
-                Instance( instance ),
-                Wait( wait )
-            {
-                auto size = min( strlen( command ) + 1, 200 );
-                memcpy( Command, command, size );
-            }
-
-            uintptr_t   Instance = 0x0;
-            bool        Wait = false;
-            char        Command[ 200 ];
-        };
-
-        inline __declspec( naked ) void ClientCmdUnrestricted( ClientCmdUnrestrictedParams* params )
-        {
-            if( params != nullptr ) {
-                typedef void( __thiscall* ClientCmdUnrestrictedFn )( uintptr_t, const char*, bool );
-                ClientCmdUnrestrictedFn( ( *reinterpret_cast< DWORD** >( params->Instance ) )[ 114 ] )( params->Instance, params->Command, params->Wait );
-            }
-            _asm retn 1;
-        }
-    }
-
     class EngineClient : public InterfaceBase
     {
         std::unique_ptr<Memory::RemoteFunction> _isConnected;
@@ -61,8 +14,52 @@ namespace CSGO
 
     public:
 
-        EngineClient( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance );
-        ~EngineClient( void ) = default;
+        explicit    EngineClient( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance = 0x0 );
+                    ~EngineClient( void ) = default;
+
+        std::string GetModuleName( void ) override          { return "engine.dll"; }
+        std::string GetInterfaceVersion( void ) override    { return "VEngineClient014"; }
+
+    private:
+
+        struct Remote
+        {
+        #pragma region IsConnected
+            class IsConnectedParams
+            {
+            public:
+                explicit IsConnectedParams( uintptr_t instance ) : Instance( instance )
+                {
+                }
+
+                uintptr_t   Instance = 0x0;
+                bool        Result = false;
+            };
+
+            static DWORD WINAPI IsConnected( LPVOID paramsPtr );
+        #pragma endregion
+        #pragma region ClientCmdUnrestricted
+            class ClientCmdUnrestrictedParams
+            {
+            public:
+                explicit ClientCmdUnrestrictedParams( uintptr_t instance, const char* command, bool wait ) :
+                    Instance( instance ),
+                    Wait( wait )
+                {
+                    auto size = min( strlen( command ) + 1, 200 );
+                    memcpy( Command, command, size );
+                }
+
+                uintptr_t   Instance = 0x0;
+                bool        Wait = false;
+                char        Command[ 200 ];
+            };
+
+            static DWORD WINAPI ClientCmdUnrestricted( LPVOID paramsPtr );
+        #pragma endregion
+        };
+
+    public:
 
         bool IsConnected( void );
         void ClientCmdUnrestricted( const char* command, bool wait = false );

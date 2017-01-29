@@ -6,8 +6,6 @@
 #include "../../../../../lib/Memory/Remote/Hook/VirtualMethodsTable/RemoteVirtualMethodHookBase.h"
 #include "../../../../../lib/Memory/Remote/Function/RemoteFunctionService.h"
 
-#include "../SharedData/ClientHookSharedData.h"
-
 namespace CLI
 {
     class CreateMoveVirtualMethodHook : public Memory::RemoteVirtualMethodHookBase
@@ -20,8 +18,8 @@ namespace CLI
         explicit CreateMoveVirtualMethodHook( Memory::SharedRemoteProcessService remoteProcessService, Memory::SharedRemoteFunctionService remoteFunctionService );
         ~CreateMoveVirtualMethodHook( void );
 
-        static DWORD WINAPI     FunctionCallback( LPVOID paramsPtr );
-        static void __fastcall  VirtualMethodCallback( void* ecx, void*, size_t number, float input, bool active );
+        static inline DWORD WINAPI FunctionCallback( LPVOID paramsPtr );
+        static void __fastcall VirtualMethodCallback( void* _ecx, void*, size_t number, float input, bool active );
     };
 }
 

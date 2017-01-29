@@ -8,6 +8,7 @@
 #include "../../Process/RemoteProcessService.h"
 
 #include <vector>
+#include <iostream>
 
 namespace Memory
 {

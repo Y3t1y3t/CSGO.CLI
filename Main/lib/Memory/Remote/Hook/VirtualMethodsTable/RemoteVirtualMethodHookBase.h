@@ -3,11 +3,9 @@
 
 #pragma once
 
-#include "../../Function/RemoteFunction.h"
-
-#include "../Base/SharedData/RemoteHookSharedDataBase.h"
-
 #include "SharedData/RemoteVirtualMethodsTableHookSharedData.h"
+
+#include "../../Function/RemoteFunction.h"
 
 #include <functional>
 

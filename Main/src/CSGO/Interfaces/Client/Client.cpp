@@ -2,11 +2,6 @@
 
 namespace CSGO
 {
-    namespace Remote
-    {
-
-    }
-
     Client::Client( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance ) :
         InterfaceBase( remoteFunctionService, instance )
     {

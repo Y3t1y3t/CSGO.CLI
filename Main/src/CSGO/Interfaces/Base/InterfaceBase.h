@@ -18,10 +18,13 @@ namespace CSGO
     public:
 
         explicit    InterfaceBase( Memory::SharedRemoteFunctionService remoteFunctionService, const uintptr_t& instance );
-                    ~InterfaceBase( void ) = default;
+        virtual     ~InterfaceBase( void ) = default;
 
-        uintptr_t   GetInstance( void ) const;
-        void        SetInstance( uintptr_t instance );
+        virtual std::string GetModuleName( void ) = 0;
+        virtual std::string GetInterfaceVersion( void ) = 0;
+
+        uintptr_t*  GetInstance( void );
+        void        SetInstance( const uintptr_t& instance );
     };
 }
 

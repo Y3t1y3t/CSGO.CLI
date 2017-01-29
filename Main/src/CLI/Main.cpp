@@ -1,10 +1,7 @@
 #include "Hooks/Client/ClientHook.h"
+#include "Hooks/HooksService.h"
 
-#include "../CSGO/Interfaces/Interfaces.h"
-
-#include "../../lib/Memory/Remote/Process/RemoteProcessService.h"
-#include "../../lib/Memory/Remote/Function/RemoteFunctionService.h"
-#include "../../lib/Memory/Remote/Hook/RemoteHookService.h"
+#include "../CSGO/Interfaces/InterfacesService.h"
 
 #include <cstdlib>
 #include <memory>
@@ -14,36 +11,37 @@
 int main()
 {
     auto remoteProcessService = std::make_shared<Memory::RemoteProcessService>();
+    auto remoteFuntionService = std::make_shared<Memory::RemoteFunctionService>( remoteProcessService );
+
     if( !remoteProcessService->Attach( Memory::RemoteProcessParamsDto( "csgo.exe", "Counter-Strike: Global Offensive" ) ) ) {
         std::cout << "failed to attach." << std::endl;
         system( "pause" );
         return -1;
     }
 
-    auto remoteFuntionService = std::make_shared<Memory::RemoteFunctionService>( remoteProcessService );
-    if( !CSGO::gInterfaces->OnLoad( remoteFuntionService ) ) {
-        std::cout << "failed to load interfaces." << std::endl;
+    auto interfacesService = std::make_unique<CSGO::InterfacesService>( remoteFuntionService );
+    if( !interfacesService->Register( &CSGO::gClient )
+        || !interfacesService->Register( &CSGO::gEngineClient ) ) {
+        std::cout << "failed to register interfaces." << std::endl;
         system( "pause" );
         return -2;
     }
 
-    auto originProcessHandle = OpenProcess( PROCESS_REMOTE, FALSE, GetCurrentProcessId() );
-    auto sharedProcessHandle = remoteProcessService->GetSharedHandle( originProcessHandle );
-
-    auto remoteHookService = std::make_shared<Memory::RemoteHookService>( remoteProcessService );
-
-    if( !CLI::gClientHook->OnLoad( remoteProcessService, remoteFuntionService, remoteHookService, CSGO::gClient->GetInstance(), sharedProcessHandle ) ) {
-        std::cout << "failed to load clienthook." << std::endl;
+    auto hooksService = std::make_unique<CLI::HooksService>( remoteProcessService, remoteFuntionService );
+    if( !hooksService->Register<CLI::ClientHook>( *CSGO::gClient->GetInstance() ) ) {
+        std::cout << "failed to register clienthook." << std::endl;
         system( "pause" );
         return -3;
     }
 
     while( remoteProcessService->IsValid() ) {
-        /*auto isConnected = CSGO::gEngineClient->IsConnected();
-        if( isConnected )
-            CSGO::gEngineClient->ClientCmdUnrestricted( "say CSGO.Extern doing it." );
+        /*
+            auto isConnected = CSGO::gEngineClient->IsConnected();
+            if( isConnected )
+                CSGO::gEngineClient->ClientCmdUnrestricted( "say CSGO.Extern doing it." );
 
-        std::cout << "IsConnected: " << ( isConnected ? "true" : "false" ) << std::endl;*/
+            std::cout << "IsConnected: " << ( isConnected ? "true" : "false" ) << std::endl;
+        */
         std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
     }
 

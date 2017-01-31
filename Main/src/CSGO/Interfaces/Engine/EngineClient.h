@@ -28,12 +28,14 @@ namespace CSGO
             class IsConnectedParams
             {
             public:
-                explicit IsConnectedParams( uintptr_t instance ) : Instance( instance )
+                explicit IsConnectedParams( const uintptr_t& instance = 0x0 ) :
+                    Instance( instance ),
+                    Result( false )
                 {
                 }
 
-                uintptr_t   Instance = 0x0;
-                bool        Result = false;
+                uintptr_t   Instance;
+                bool        Result;
             };
 
             static DWORD WINAPI IsConnected( LPVOID paramsPtr );

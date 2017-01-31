@@ -87,6 +87,21 @@
     <ClCompile Include="src\CSGO\Interfaces\InterfacesService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CSGO\ClientClass\ClientClassService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSGO\ClientClass\ClientClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Dto\Base\RemoteDtoBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Dto\Member\Base\RemoteDtoMemberBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimpleMember.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunction.h">
@@ -156,6 +171,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CSGO\Interfaces\InterfacesService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSGO\ClientClass\ClientClassService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSGO\ClientClass\ClientClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Dto\Base\RemoteDtoBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Dto\Member\Base\RemoteDtoMemberBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimpleMember.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

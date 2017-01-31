@@ -4,7 +4,6 @@
 #include "../CSGO/Interfaces/InterfacesService.h"
 
 #include <cstdlib>
-#include <memory>
 #include <iostream>
 #include <thread>
 

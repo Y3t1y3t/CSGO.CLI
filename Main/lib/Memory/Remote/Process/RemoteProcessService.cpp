@@ -79,6 +79,11 @@ namespace Memory
         return nullptr;
     }
 
+    bool RemoteProcessService::Read( const uintptr_t& ptr, LPVOID out, const size_t& size ) const
+    {
+        return ReadProcessMemory( _process.Handle, LPCVOID( ptr ), out, size, nullptr ) != FALSE;
+    }
+
     bool RemoteProcessService::IsValid( void )
     {
         _process.Id = 0;

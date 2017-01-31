@@ -7,5 +7,30 @@ namespace CSGO
     {
     }
 
+    DWORD Client::Remote::GetAllClasses( LPVOID paramsPtr )
+    {
+        if( paramsPtr != nullptr ) {
+            auto params = static_cast< GetAllClassesParams* >( paramsPtr );
+
+            typedef uintptr_t( __thiscall* GetAllClassesFn )( uintptr_t );
+            params->Result = GetAllClassesFn( ( *reinterpret_cast< DWORD** >( params->Instance ) )[ 8 ] )( params->Instance );
+        }
+        return 0;
+    }
+
+    uintptr_t Client::GetAllClasses( void )
+    {
+        auto params = Remote::GetAllClassesParams( _instance );
+        if( _getAllClasses == nullptr && !_remoteFunctionService->Create( Remote::GetAllClasses, &params, sizeof( Remote::GetAllClassesParams ), &_getAllClasses ) )
+            return 0x0;
+
+        if( !_remoteFunctionService->Execute( _getAllClasses ) )
+            return 0x0;
+
+        if( !_getAllClasses->GetDataPtrValue( &params ) )
+            return 0x0;
+        return params.Result;
+    }
+
     std::unique_ptr<Client> gClient;
 }

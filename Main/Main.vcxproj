@@ -89,6 +89,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="lib\Memory\Remote\Dto\Member\Base\RemoteDtoMemberBase.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimpleMember.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunction.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionExecuter.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionFactory.cpp" />
@@ -103,18 +105,23 @@
     <ClCompile Include="lib\Memory\Remote\Hook\VirtualMethodsTable\SharedData\RemoteVirtualMethodsTableHookSharedData.cpp" />
     <ClCompile Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsTableHook.cpp" />
     <ClCompile Include="lib\Memory\Remote\Process\RemoteProcessService.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Dto\Base\RemoteDtoBase.cpp" />
     <ClCompile Include="src\CLI\Hooks\Client\ClientHook.cpp" />
     <ClCompile Include="src\CLI\Hooks\Client\SharedData\ClientHookSharedData.cpp" />
     <ClCompile Include="src\CLI\Hooks\Client\VirtualMethods\CreateMoveVirtualMethodHook.cpp" />
     <ClCompile Include="src\CLI\Hooks\Base\HookBase.cpp" />
     <ClCompile Include="src\CLI\Hooks\HooksService.cpp" />
     <ClCompile Include="src\CLI\Main.cpp" />
+    <ClCompile Include="src\CSGO\ClientClass\ClientClass.cpp" />
+    <ClCompile Include="src\CSGO\ClientClass\ClientClassService.cpp" />
     <ClCompile Include="src\CSGO\Interfaces\Client\Client.cpp" />
     <ClCompile Include="src\CSGO\Interfaces\Base\InterfaceBase.cpp" />
     <ClCompile Include="src\CSGO\Interfaces\Engine\EngineClient.cpp" />
     <ClCompile Include="src\CSGO\Interfaces\InterfacesService.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="lib\Memory\Remote\Dto\Member\Base\RemoteDtoMemberBase.h" />
+    <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimpleMember.h" />
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunction.h" />
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionExecuter.h" />
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionFactory.h" />
@@ -129,11 +136,14 @@
     <ClInclude Include="lib\Memory\Remote\Hook\VirtualMethodsTable\SharedData\RemoteVirtualMethodsTableHookSharedData.h" />
     <ClInclude Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsTableHook.h" />
     <ClInclude Include="lib\Memory\Remote\Process\RemoteProcessService.h" />
+    <ClInclude Include="lib\Memory\Remote\Dto\Base\RemoteDtoBase.h" />
     <ClInclude Include="src\CLI\Hooks\Client\ClientHook.h" />
     <ClInclude Include="src\CLI\Hooks\Client\SharedData\ClientHookSharedData.h" />
     <ClInclude Include="src\CLI\Hooks\Client\VirtualMethods\CreateMoveVirtualMethodHook.h" />
     <ClInclude Include="src\CLI\Hooks\Base\HookBase.h" />
     <ClInclude Include="src\CLI\Hooks\HooksService.h" />
+    <ClInclude Include="src\CSGO\ClientClass\ClientClass.h" />
+    <ClInclude Include="src\CSGO\ClientClass\ClientClassService.h" />
     <ClInclude Include="src\CSGO\Interfaces\Client\Client.h" />
     <ClInclude Include="src\CSGO\Interfaces\Base\InterfaceBase.h" />
     <ClInclude Include="src\CSGO\Interfaces\Engine\EngineClient.h" />

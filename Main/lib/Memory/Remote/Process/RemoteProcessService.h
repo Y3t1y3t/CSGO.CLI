@@ -46,57 +46,52 @@ namespace Memory
         RemoteProcessService( void ) = default;
         ~RemoteProcessService( void );
 
-        bool Attach( const RemoteProcessParamsDto& process );
-        void Detach( void );
+        bool                        Attach( const RemoteProcessParamsDto& process );
+        void                        Detach( void );
 
-        LPVOID  AllocRemoteData( const byte* data, size_t size ) const;
-        bool    DeallocRemoteData( LPVOID entryPoint ) const;
+        LPVOID                      AllocRemoteData( const byte* data, size_t size ) const;
+        bool                        DeallocRemoteData( LPVOID entryPoint ) const;
 
-        HANDLE  StartRemoteThread( LPVOID entryPoint, LPVOID data ) const;
-        HANDLE  GetSharedHandle( HANDLE handle, DWORD accessRights = PROCESS_REMOTE ) const;
+        HANDLE                      StartRemoteThread( LPVOID entryPoint, LPVOID data ) const;
+        HANDLE                      GetSharedHandle( HANDLE handle, DWORD accessRights = PROCESS_REMOTE ) const;
 
-        template<class T>
-        bool    Read( LPCVOID ptr, T* out );
+        bool                        Read( const uintptr_t& ptr, LPVOID out, const size_t& size ) const;
+        template<class T> bool      Read( LPCVOID ptr, T* out ) const;
+        template<class T> bool      Read( const uintptr_t& ptr, T* out ) const;
 
-        template<class T>
-        bool    Read( uintptr_t ptr, T* out );
+        template<class T> bool      Write( LPVOID ptr, const T& in ) const;
+        template<class T> bool      Write( const uintptr_t& ptr, const T& in ) const;
 
-        template<class T>
-        bool    Write( LPVOID ptr, const T& in );
+        bool                        IsValid( void );
 
-        template<class T>
-        bool    Write( uintptr_t ptr, const T& in );
-
-        bool    IsValid( void );
-
-        RemoteProcessDto& Get( void );
+        RemoteProcessDto&           Get( void );
 
     private:
 
-        bool GetProcessId( void );
-        bool GetProcessHandle( void );
+        bool                        GetProcessId( void );
+        bool                        GetProcessHandle( void );
     };
 
     template <class T>
-    bool RemoteProcessService::Read( LPCVOID ptr, T* out )
+    bool RemoteProcessService::Read( LPCVOID ptr, T* out ) const
     {
         return ReadProcessMemory( _process.Handle, ptr, out, sizeof( T ), nullptr ) != FALSE;
     }
 
     template <class T>
-    bool RemoteProcessService::Read( uintptr_t ptr, T* out )
+    bool RemoteProcessService::Read( const uintptr_t& ptr, T* out ) const
     {
         return ReadProcessMemory( _process.Handle, LPCVOID( ptr ), out, sizeof( T ), nullptr ) != FALSE;
     }
 
     template <class T>
-    bool RemoteProcessService::Write( LPVOID ptr, const T& in )
+    bool RemoteProcessService::Write( LPVOID ptr, const T& in ) const
     {
         return WriteProcessMemory( _process.Handle, ptr, LPCVOID( &in ), sizeof( T ), nullptr ) != FALSE;
     }
 
     template <class T>
-    bool RemoteProcessService::Write( uintptr_t ptr, const T& in )
+    bool RemoteProcessService::Write( const uintptr_t& ptr, const T& in ) const
     {
         return WriteProcessMemory( _process.Handle, LPVOID( ptr ), LPCVOID( &in ), sizeof( T ), nullptr ) != FALSE;
     }

@@ -99,7 +99,7 @@
     <ClCompile Include="lib\Memory\Remote\Dto\Member\Base\RemoteDtoMemberBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimpleMember.cpp">
+    <ClCompile Include="lib\Memory\Remote\Dto\RemoteDtoMemberResolver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -186,6 +186,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimpleMember.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimplePtrMember.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoPtrMember.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Dto\RemoteDtoMemberResolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

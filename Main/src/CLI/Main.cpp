@@ -1,6 +1,7 @@
 #include "Hooks/Client/ClientHook.h"
 #include "Hooks/HooksService.h"
 
+#include "../CSGO/ClientClass/ClientClass.h"
 #include "../CSGO/Interfaces/InterfacesService.h"
 
 #include <cstdlib>
@@ -33,14 +34,21 @@ int main()
         return -3;
     }
 
+    std::unique_ptr<CSGO::ClientClass> clientClassPtr;
     while( remoteProcessService->IsValid() ) {
-        /*
-            auto isConnected = CSGO::gEngineClient->IsConnected();
-            if( isConnected )
-                CSGO::gEngineClient->ClientCmdUnrestricted( "say CSGO.Extern doing it." );
 
-            std::cout << "IsConnected: " << ( isConnected ? "true" : "false" ) << std::endl;
-        */
+        auto isConnected = CSGO::gEngineClient->IsConnected();
+        if( isConnected && clientClassPtr == nullptr ) {
+
+            clientClassPtr = std::make_unique<CSGO::ClientClass>( remoteProcessService, CSGO::gClient->GetAllClasses() );
+            if( clientClassPtr->Update() ) {
+                for( auto clientClass = clientClassPtr.get(); clientClass != nullptr; clientClass = clientClass->Next.GetPtr() ) {
+                    clientClass->Update();
+                    std::cout << "Name: " << clientClass->Name.GetPtr() << ", Id: " << clientClass->Id.Get() << std::endl;
+                }
+            }
+        }
+
         std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
     }
 

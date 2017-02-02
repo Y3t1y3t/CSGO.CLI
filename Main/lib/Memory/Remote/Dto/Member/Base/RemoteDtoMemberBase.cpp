@@ -2,10 +2,8 @@
 
 namespace Memory
 {
-    RemoteDtoMemberBase::RemoteDtoMemberBase( const size_t& offset, const size_t& size, std::vector<byte>* data ) :
-        _offset( offset ),
-        _size( size ),
-        _data( data )
+    RemoteDtoMemberBase::RemoteDtoMemberBase( const size_t& offset ) :
+        _offset( offset )
     {
     }
 
@@ -14,13 +12,8 @@ namespace Memory
         return _offset;
     }
 
-    size_t RemoteDtoMemberBase::GetSize( void ) const
+    size_t RemoteDtoMemberBase::GetDataSize( void ) const
     {
-        return _size;
-    }
-
-    void RemoteDtoMemberBase::SetData( std::vector<byte>* data )
-    {
-        _data = data;
+        return GetOffset() + GetSize();
     }
 }

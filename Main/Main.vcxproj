@@ -90,7 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="lib\Memory\Remote\Dto\Member\Base\RemoteDtoMemberBase.cpp" />
-    <ClCompile Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimpleMember.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Dto\RemoteDtoMemberResolver.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunction.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionExecuter.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunctionFactory.cpp" />
@@ -121,7 +121,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\Memory\Remote\Dto\Member\Base\RemoteDtoMemberBase.h" />
+    <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoPtrMember.h" />
     <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimpleMember.h" />
+    <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimplePtrMember.h" />
+    <ClInclude Include="lib\Memory\Remote\Dto\RemoteDtoMemberResolver.h" />
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunction.h" />
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionExecuter.h" />
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunctionFactory.h" />

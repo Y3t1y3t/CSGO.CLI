@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "../../../Process/RemoteProcessService.h"
+
 #include <windows.h>
 #include <vector>
 #include <typeinfo>
@@ -11,23 +13,20 @@ namespace Memory
 {
     class RemoteDtoMemberBase
     {
-        const size_t        Identifier = typeid( RemoteDtoMemberBase ).hash_code();
+        const size_t    Identifier = typeid( RemoteDtoMemberBase ).hash_code();
 
-    protected:
-
-        size_t              _offset;
-        size_t              _size;
-        std::vector<byte>*  _data;
+        size_t          _offset;
 
     public:
 
-        explicit    RemoteDtoMemberBase( const size_t& offset, const size_t& size, std::vector<byte>* data = nullptr );
-                    ~RemoteDtoMemberBase( void ) = default;
+        explicit        RemoteDtoMemberBase( const size_t& offset );
+        virtual         ~RemoteDtoMemberBase( void ) = default;
 
-        size_t      GetOffset( void ) const;
-        size_t      GetSize( void ) const;
+        virtual bool    OnUpdate( SharedRemoteProcessService remoteProcessService, std::vector<byte>* data ) = 0;
+        virtual size_t  GetSize( void ) const = 0;
 
-        void        SetData( std::vector<byte>* data );
+        size_t          GetOffset( void ) const;
+        size_t          GetDataSize( void ) const;
     };
 }
 

@@ -10,30 +10,50 @@ namespace Memory
     template <class T>
     class RemoteDtoSimpleMember : public RemoteDtoMemberBase
     {
-    public:
-        explicit    RemoteDtoSimpleMember( const size_t& offset );
-                    ~RemoteDtoSimpleMember( void ) = default;
+        T*          _dataValue;
 
+    public:
+
+        explicit    RemoteDtoSimpleMember( const size_t& offset );
+                    ~RemoteDtoSimpleMember( void ) {}
+
+        bool        OnUpdate( SharedRemoteProcessService remoteProcessService, std::vector<byte>* data ) override;
+        size_t      GetSize( void ) const override;
+
+        T*          GetPtr( void );
         T           Get( void );
-        void        Get( T* out );
     };
 
     template <class T>
     RemoteDtoSimpleMember<T>::RemoteDtoSimpleMember( const size_t& offset ) :
-        RemoteDtoMemberBase( offset, sizeof( T ) )
+        RemoteDtoMemberBase( offset ),
+        _dataValue( nullptr )
     {
     }
 
     template <class T>
-    T RemoteDtoSimpleMember<T>::Get()
+    bool RemoteDtoSimpleMember<T>::OnUpdate( SharedRemoteProcessService /*remoteProcessService*/, std::vector<byte>* data )
     {
-        return *reinterpret_cast< T* >( &_data->at( _offset ) );
+        _dataValue = reinterpret_cast< T* >( &data->at( GetOffset() ) );
+        return true;
     }
 
     template <class T>
-    void RemoteDtoSimpleMember<T>::Get( T* out )
+    size_t RemoteDtoSimpleMember<T>::GetSize( void ) const
     {
-        *out = *reinterpret_cast< T* >( &_data->at( _offset ) );
+        return sizeof( T );
+    }
+
+    template <class T>
+    T* RemoteDtoSimpleMember<T>::GetPtr( void )
+    {
+        return _dataValue;
+    }
+
+    template <class T>
+    T RemoteDtoSimpleMember<T>::Get( void )
+    {
+        return *_dataValue;
     }
 
     typedef RemoteDtoSimpleMember<float>    RemoteFloat;

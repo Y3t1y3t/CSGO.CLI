@@ -3,13 +3,13 @@
 
 #pragma once
 
+#include "../../../lib/Memory/Remote/Function/RemoteFunctionParams.h"
+#include "../../../lib/Memory/Remote/Function/RemoteFunctionService.h"
+
 // ReSharper disable CppUnusedIncludeDirective
 #include "Client/Client.h"
 #include "Engine/EngineClient.h"
 // ReSharper restore CppUnusedIncludeDirective
-
-#include "../../../lib/Memory/Remote/Function/RemoteFunctionParams.h"
-#include "../../../lib/Memory/Remote/Function/RemoteFunctionService.h"
 
 #include <memory>
 
@@ -67,7 +67,9 @@ namespace CSGO
         *interfacePtr = std::make_unique<T>( _remoteFunctionService );
 
         auto params = Remote::GetInterfaceParams( ( *interfacePtr )->GetModuleName(), ( *interfacePtr )->GetInterfaceVersion() );
-        if( _getInterfaces == nullptr && !_remoteFunctionService->Create( Remote::GetInterface, &params, sizeof( Remote::GetInterfaceParams ), &_getInterfaces ) )
+        if( _getInterfaces == nullptr 
+            && !_remoteFunctionService->Create( Remote::GetInterface, &params, sizeof( Remote::GetInterfaceParams ), &_getInterfaces )
+            || !_getInterfaces->SetDataPtrValue( params ) )
             return false;
 
         if( !_remoteFunctionService->Execute( _getInterfaces ) )

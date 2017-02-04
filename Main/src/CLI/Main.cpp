@@ -1,8 +1,8 @@
 #include "Hooks/Client/ClientHook.h"
 #include "Hooks/HooksService.h"
 
-#include "../CSGO/ClientClass/ClientClass.h"
 #include "../CSGO/Interfaces/InterfacesService.h"
+#include "../CSGO/ClientClass/ClientClassService.h"
 
 #include <cstdlib>
 #include <iostream>
@@ -27,28 +27,18 @@ int main()
         return -2;
     }
 
+    auto clientClassService = std::make_unique<CSGO::ClientClassService>( remoteProcessService, CSGO::gClient->GetAllClasses() );
+
+    std::cout << std::hex << clientClassService->GetRecvPropOffset( "DT_BaseEntity", "m_vecOrigin" ) << std::endl;
+
     auto hooksService = std::make_unique<CLI::HooksService>( remoteProcessService, remoteFuntionService );
-    if( !hooksService->Register<CLI::ClientHook>( *CSGO::gClient->GetInstance() ) ) {
+    if( !hooksService->Register<CLI::ClientHook>( CSGO::gClient->GetInstance() ) ) {
         std::cout << "failed to register clienthook." << std::endl;
         system( "pause" );
         return -3;
-    }
+    }    
 
-    std::unique_ptr<CSGO::ClientClass> clientClassPtr;
     while( remoteProcessService->IsValid() ) {
-
-        auto isConnected = CSGO::gEngineClient->IsConnected();
-        if( isConnected && clientClassPtr == nullptr ) {
-
-            clientClassPtr = std::make_unique<CSGO::ClientClass>( remoteProcessService, CSGO::gClient->GetAllClasses() );
-            if( clientClassPtr->Update() ) {
-                for( auto clientClass = clientClassPtr.get(); clientClass != nullptr; clientClass = clientClass->Next.GetPtr() ) {
-                    clientClass->Update();
-                    std::cout << "Name: " << clientClass->Name.GetPtr() << ", Id: " << clientClass->Id.Get() << std::endl;
-                }
-            }
-        }
-
         std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
     }
 

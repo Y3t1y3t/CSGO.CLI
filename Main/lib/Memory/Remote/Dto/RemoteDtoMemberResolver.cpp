@@ -1,8 +1,10 @@
 ﻿#include "RemoteDtoMemberResolver.h"
 
+#include <algorithm>
+
 namespace Memory
 {
-    bool RemoteDtoMemberResolver::Parse( const uintptr_t& baseClassPtr, size_t inheritedClassSize, std::vector<RemoteDtoMemberBase*> *members ) const
+    bool RemoteDtoMemberResolver::Resolve( const uintptr_t& baseClassPtr, size_t inheritedClassSize, size_t *maxDataSize, std::list<RemoteDtoMemberBase*> *members ) const
     {
         auto sizeCount = size_t( floor( inheritedClassSize / sizeof( size_t ) ) );
 
@@ -10,10 +12,14 @@ namespace Memory
         auto inheritedObjPtr = reinterpret_cast< size_t* >( inheritedObjStart );
 
         for( auto count = 0U; count < sizeCount; ++count ) {
-            if( inheritedObjPtr[ count ] == RemoteDtoMemberIdentifier ) {
-                auto member = reinterpret_cast< RemoteDtoMemberBase* >( &inheritedObjPtr[ count - 1U ] );
-                members->emplace_back( member );
-            }
+
+            if( inheritedObjPtr[ count ] != RemoteDtoMemberIdentifier )
+                continue;
+
+            auto member = reinterpret_cast< RemoteDtoMemberBase* >( &inheritedObjPtr[ count - 1U ] );
+            *maxDataSize = std::max<size_t>( member->GetDataSize(), *maxDataSize );
+
+            members->emplace_back( member );
         }
 
         return !members->empty();

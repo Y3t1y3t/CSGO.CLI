@@ -15,10 +15,10 @@ namespace CSGO
     public:
 
         explicit    EngineClient( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance = 0x0 );
-                    ~EngineClient( void ) = default;
+                    ~EngineClient() = default;
 
-        std::string GetModuleName( void ) override          { return "engine.dll"; }
-        std::string GetInterfaceVersion( void ) override    { return "VEngineClient014"; }
+        std::string GetModuleName() override          { return "engine.dll"; }
+        std::string GetInterfaceVersion() override    { return "VEngineClient014"; }
 
     private:
 
@@ -63,7 +63,7 @@ namespace CSGO
 
     public:
 
-        bool IsConnected( void );
+        bool IsConnected();
         void ClientCmdUnrestricted( const char* command, bool wait = false );
     };
 

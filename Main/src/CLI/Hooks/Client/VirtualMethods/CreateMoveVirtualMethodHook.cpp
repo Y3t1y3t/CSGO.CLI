@@ -11,7 +11,7 @@ namespace CLI
     CreateMoveVirtualMethodHook::CreateMoveVirtualMethodHook( Memory::SharedRemoteProcessService remoteProcessService, Memory::SharedRemoteFunctionService remoteFunctionService )
     {
         if( _self != nullptr )
-            throw std::exception( "only on instance can be created at the same time." );
+            throw std::exception( "only one instance can be created at the same time." );
 
         _self = this;
         _remoteProcessService = remoteProcessService;
@@ -49,7 +49,7 @@ namespace CLI
         if( _ecx != nullptr ) {
             auto sharedData = reinterpret_cast< ClientHookSharedData* >( *reinterpret_cast< uintptr_t* >( _ecx ) - sizeof( ClientHookSharedData ) );
 
-            typedef void( __thiscall* CreateMoveFn )( uintptr_t, size_t, float, bool );
+            using CreateMoveFn = void( __thiscall* )( uintptr_t, size_t, float, bool );
             CreateMoveFn( sharedData->CreateMoveData.Function )( sharedData->VirtualMethodsTablePtr, number, input, active );
 
             sharedData->CreateMoveData.Params.Number = number;

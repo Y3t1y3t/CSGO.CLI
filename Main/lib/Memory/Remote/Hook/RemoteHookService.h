@@ -9,7 +9,7 @@ namespace Memory
 {
     class RemoteHookService;
 
-    typedef std::shared_ptr<RemoteHookService> SharedRemoteHookService;
+    using SharedRemoteHookService = std::shared_ptr<RemoteHookService>;
 
     class RemoteHookService
     {
@@ -18,7 +18,7 @@ namespace Memory
     public:
 
         explicit RemoteHookService( SharedRemoteProcessService remoteProcessService );
-        ~RemoteHookService( void ) = default;
+        ~RemoteHookService() = default;
 
         template<typename T>
         bool Create( const uintptr_t& virtualMethodsTablePtr, HANDLE sharedOriginProcessHandle, std::unique_ptr<RemoteVirtualMethodsTableHook>* hook );

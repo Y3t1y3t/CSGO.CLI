@@ -12,7 +12,7 @@ namespace CSGO
         if( paramsPtr != nullptr ) {
             auto params = static_cast< IsConnectedParams* >( paramsPtr );
 
-            typedef bool( __thiscall* IsConnectedFn )( uintptr_t );
+            using IsConnectedFn = bool( __thiscall* )( uintptr_t );
             params->Result = IsConnectedFn( ( *reinterpret_cast< DWORD** >( params->Instance ) )[ 27 ] )( params->Instance );
         }
         return 0;
@@ -23,13 +23,13 @@ namespace CSGO
         if( paramsPtr != nullptr ) {
             auto params = static_cast< ClientCmdUnrestrictedParams* >( paramsPtr );
 
-            typedef void( __thiscall* ClientCmdUnrestrictedFn )( uintptr_t, const char*, bool );
+            using ClientCmdUnrestrictedFn = void( __thiscall* )( uintptr_t, const char*, bool );
             ClientCmdUnrestrictedFn( ( *reinterpret_cast< DWORD** >( params->Instance ) )[ 114 ] )( params->Instance, params->Command, params->Wait );
         }
         return 0;
     }
 
-    bool EngineClient::IsConnected( void )
+    bool EngineClient::IsConnected()
     {
         auto params = Remote::IsConnectedParams( _instance );
         if( _isConnected == nullptr && !_remoteFunctionService->Create( Remote::IsConnected, &params, sizeof( Remote::IsConnectedParams ), &_isConnected ) )

@@ -8,31 +8,31 @@ namespace Memory
 {
     RemoteDtoBase::RemoteDtoBase( SharedRemoteProcessService remoteProcessService, const uintptr_t& base ) :
         _remoteProcessService( remoteProcessService ),
-        _base( base ),
-        _members( std::vector<RemoteDtoMemberBase*>() ),
-        _data( std::vector<byte>() )
+        _members( std::list<RemoteDtoMemberBase*>() ),
+        _data( std::vector<byte>() ),
+        _base( base )
     {
     }
 
     bool RemoteDtoBase::Initialize( const size_t& inheritedClassSize )
     {
-        if( !RemoteDtoMemberResolver().Parse( uintptr_t( this ), inheritedClassSize, &_members ) )
+        size_t maxDataSize = 0;
+        if( !RemoteDtoMemberResolver().Resolve( uintptr_t( this ), inheritedClassSize, &maxDataSize, &_members ) )
             return false;
-        return !( _data = std::vector<byte>( GetMaxDataSize() ) ).empty();
+        return !( _data = std::vector<byte>( maxDataSize ) ).empty();
     }
 
-
-    bool RemoteDtoBase::Update( bool loadLazy /* = false */ )
+    bool RemoteDtoBase::Update( size_t level /* = 1 */ )
     {
         if( !UpdateData() )
             return false;
-        return loadLazy || UpdateMembers();
+        return UpdateMembers( level );
     }
 
-    bool RemoteDtoBase::ForceUpdate( const uintptr_t& base, bool loadLazy /* = false */ )
+    bool RemoteDtoBase::ForceUpdate( const uintptr_t& base, size_t level /* = 1 */ )
     {
         SetBase( base );
-        return Update( loadLazy );
+        return Update( level );
     }
 
     void RemoteDtoBase::SetBase( const uintptr_t& base )
@@ -40,25 +40,21 @@ namespace Memory
         _base = base;
     }
 
-    bool RemoteDtoBase::UpdateData( void )
+    bool RemoteDtoBase::UpdateData()
     {
         return _remoteProcessService->Read( _base, &_data.at( 0 ), _data.size() );
     }
 
-    bool RemoteDtoBase::UpdateMembers( void )
+    bool RemoteDtoBase::UpdateMembers( size_t level )
     {
+        if( level-- == 0U )
+            return true;
+
         auto result = true;
         std::for_each( _members.begin(), _members.end(), [ & ] ( auto member ) {
-            if( !member->OnUpdate( _remoteProcessService, &_data ) )
+            if( !member->OnUpdate( _remoteProcessService, level, &_data ) )
                 result = false;
-        } );
+        });
         return result;
-    }
-
-    size_t RemoteDtoBase::GetMaxDataSize( void )
-    {
-        return ( *std::max_element( _members.begin(), _members.end(), [] ( RemoteDtoMemberBase* a, RemoteDtoMemberBase* b ) {
-            return a->GetDataSize() < b->GetDataSize();
-        } ) )->GetDataSize();
     }
 }

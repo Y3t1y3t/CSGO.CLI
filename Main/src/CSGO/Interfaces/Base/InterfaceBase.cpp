@@ -8,12 +8,16 @@ namespace CSGO
     {
     }
 
-    uintptr_t* InterfaceBase::GetInstance( void )
+    InterfaceBase::~InterfaceBase()
     {
-        return &_instance;
     }
 
-    void InterfaceBase::SetInstance(  const uintptr_t& instance )
+    uintptr_t InterfaceBase::GetInstance() const
+    {
+        return _instance;
+    }
+
+    void InterfaceBase::SetInstance( const uintptr_t& instance )
     {
         _instance = instance;
     }

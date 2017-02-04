@@ -14,10 +14,10 @@ namespace CSGO
     public:
 
         explicit    Client( Memory::SharedRemoteFunctionService remoteFunctionService, uintptr_t instance = 0x0 );
-                    ~Client( void ) = default;
+                    ~Client() = default;
 
-        std::string GetModuleName( void ) override          { return "client.dll"; }
-        std::string GetInterfaceVersion( void ) override    { return "VClient018"; }
+        std::string GetModuleName() override          { return "client.dll"; }
+        std::string GetInterfaceVersion() override    { return "VClient018"; }
 
     private:
 
@@ -43,7 +43,7 @@ namespace CSGO
 
     public:
 
-        uintptr_t GetAllClasses( void );
+        uintptr_t GetAllClasses();
     };
 
     extern std::unique_ptr<Client> gClient;

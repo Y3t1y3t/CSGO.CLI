@@ -20,7 +20,7 @@ namespace CLI
         HookBase( Memory::SharedRemoteProcessService remoteProcessService,
                     Memory::SharedRemoteFunctionService remoteFunctionService,
                     Memory::SharedRemoteHookService remoteHookService );
-        virtual ~HookBase( void ) = default;
+        virtual ~HookBase() = default;
 
         virtual bool Register( const uintptr_t& instance, const HANDLE& sharedOriginProcessHandle ) = 0;
     };

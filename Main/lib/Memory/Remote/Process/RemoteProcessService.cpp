@@ -19,7 +19,7 @@ namespace Memory
         Handle = INVALID_HANDLE_VALUE;
     }
 
-    RemoteProcessService::~RemoteProcessService( void )
+    RemoteProcessService::~RemoteProcessService()
     {
         Detach();
     }
@@ -42,7 +42,7 @@ namespace Memory
         return false;
     }
 
-    void RemoteProcessService::Detach( void )
+    void RemoteProcessService::Detach()
     {
         if( _process.Handle != INVALID_HANDLE_VALUE )
             CloseHandle( _process.Handle );
@@ -84,18 +84,18 @@ namespace Memory
         return ReadProcessMemory( _process.Handle, LPCVOID( ptr ), out, size, nullptr ) != FALSE;
     }
 
-    bool RemoteProcessService::IsValid( void )
+    bool RemoteProcessService::IsValid()
     {
         _process.Id = 0;
         return GetProcessId();
     }
 
-    RemoteProcessDto& RemoteProcessService::Get( void )
+    RemoteProcessDto& RemoteProcessService::Get()
     {
         return _process;
     }
 
-    bool RemoteProcessService::GetProcessId( void )
+    bool RemoteProcessService::GetProcessId()
     {
         if( _process.WindowName.empty() && _process.WindowClassName.empty() ) {
             auto hSnapshot = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
@@ -122,7 +122,7 @@ namespace Memory
         return bool( _process.Id != 0 );
     }
 
-    bool RemoteProcessService::GetProcessHandle( void )
+    bool RemoteProcessService::GetProcessHandle()
     {
         if( _process.Id == 0 )
             return false;

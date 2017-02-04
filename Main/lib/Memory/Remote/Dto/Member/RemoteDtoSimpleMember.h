@@ -15,13 +15,13 @@ namespace Memory
     public:
 
         explicit    RemoteDtoSimpleMember( const size_t& offset );
-                    ~RemoteDtoSimpleMember( void ) {}
+        ~RemoteDtoSimpleMember() {}
 
-        bool        OnUpdate( SharedRemoteProcessService remoteProcessService, std::vector<byte>* data ) override;
-        size_t      GetSize( void ) const override;
+        bool        OnUpdate( SharedRemoteProcessService remoteProcessService, size_t level, std::vector<byte>* data ) override;
+        size_t      GetSize() const override;
 
-        T*          GetPtr( void );
-        T           Get( void );
+        T*          GetPtr();
+        T           Get();
     };
 
     template <class T>
@@ -32,34 +32,35 @@ namespace Memory
     }
 
     template <class T>
-    bool RemoteDtoSimpleMember<T>::OnUpdate( SharedRemoteProcessService /*remoteProcessService*/, std::vector<byte>* data )
+    bool RemoteDtoSimpleMember<T>::OnUpdate( SharedRemoteProcessService /*remoteProcessService*/, size_t /*level*/, std::vector<byte>* data )
     {
         _dataValue = reinterpret_cast< T* >( &data->at( GetOffset() ) );
-        return true;
+        return _dataValue != nullptr;
     }
 
     template <class T>
-    size_t RemoteDtoSimpleMember<T>::GetSize( void ) const
+    size_t RemoteDtoSimpleMember<T>::GetSize() const
     {
         return sizeof( T );
     }
 
     template <class T>
-    T* RemoteDtoSimpleMember<T>::GetPtr( void )
+    T* RemoteDtoSimpleMember<T>::GetPtr()
     {
         return _dataValue;
     }
 
     template <class T>
-    T RemoteDtoSimpleMember<T>::Get( void )
+    T RemoteDtoSimpleMember<T>::Get()
     {
         return *_dataValue;
     }
 
-    typedef RemoteDtoSimpleMember<float>    RemoteFloat;
-    typedef RemoteDtoSimpleMember<int>      RemoteInt;
-    typedef RemoteDtoSimpleMember<double>   RemoteDouble;
-    typedef RemoteDtoSimpleMember<size_t>   RemoteSize;
+    using RemoteFloat = RemoteDtoSimpleMember<float>;
+    using RemoteInt = RemoteDtoSimpleMember<int>;
+    using RemoteDouble = RemoteDtoSimpleMember<double>;
+    using RemoteSize = RemoteDtoSimpleMember<size_t>;
+    using RemoteUIntPtr = RemoteDtoSimpleMember<uintptr_t>;
 }
 
 #endif /* _MEMORY_REMOTEDTOSIMPLEMEMBER_H_ */

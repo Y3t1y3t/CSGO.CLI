@@ -17,7 +17,7 @@ namespace Memory
         _remoteProcessService->Read<uintptr_t>( _virtualMethodsTable.Ptr, &_virtualMethodsTable.PtrValue );
     }
 
-    RemoteVirtualMethodsTableHook::~RemoteVirtualMethodsTableHook( void )
+    RemoteVirtualMethodsTableHook::~RemoteVirtualMethodsTableHook()
     {
         RemoveTableHook();
 
@@ -27,22 +27,22 @@ namespace Memory
         }
     }
 
-    void RemoteVirtualMethodsTableHook::SetTableHook( void ) const
+    void RemoteVirtualMethodsTableHook::SetTableHook() const
     {
         _remoteProcessService->Write<uintptr_t>( _virtualMethodsTable.Ptr, GetVirtualMethodsPtr() );
     }
 
-    void RemoteVirtualMethodsTableHook::RemoveTableHook( void ) const
+    void RemoteVirtualMethodsTableHook::RemoveTableHook() const
     {
         _remoteProcessService->Write<uintptr_t>( _virtualMethodsTable.Ptr, _virtualMethodsTable.PtrValue );
     }
 
-    bool RemoteVirtualMethodsTableHook::IsValidSharedDataPtr( void ) const
+    bool RemoteVirtualMethodsTableHook::IsValidSharedDataPtr() const
     {
         return _sharedData.Ptr != 0x0;
     }
 
-    uintptr_t RemoteVirtualMethodsTableHook::GetVirtualMethodsPtr( void ) const
+    uintptr_t RemoteVirtualMethodsTableHook::GetVirtualMethodsPtr() const
     {
         return GetSharedDataPtr() + GetSharedDataSize();
     }
@@ -62,7 +62,7 @@ namespace Memory
         _remoteProcessService->Write<uintptr_t>( GetVirtualMethodsPtr() + index * sizeof( uintptr_t ), virtualMethodPtr );
     }
 
-    uintptr_t RemoteVirtualMethodsTableHook::GetSharedDataPtr( void ) const
+    uintptr_t RemoteVirtualMethodsTableHook::GetSharedDataPtr() const
     {
         return _sharedData.Ptr;
     }
@@ -72,7 +72,7 @@ namespace Memory
         _sharedData.Ptr = sharedDataPtr;
     }
 
-    size_t RemoteVirtualMethodsTableHook::GetSharedDataSize( void ) const
+    size_t RemoteVirtualMethodsTableHook::GetSharedDataSize() const
     {
         return _sharedData.Size;
     }

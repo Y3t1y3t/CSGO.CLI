@@ -9,33 +9,32 @@
 
 #include <vector>
 #include <windows.h>
+#include <list>
 
 namespace Memory
 {
     class RemoteDtoBase
     {
         SharedRemoteProcessService          _remoteProcessService;
-        std::vector<RemoteDtoMemberBase*>   _members;
+        std::list<RemoteDtoMemberBase*>     _members;
         std::vector<byte>                   _data;
         uintptr_t                           _base;
 
     public:
 
         explicit    RemoteDtoBase( SharedRemoteProcessService remoteProcessService, const uintptr_t& base );
-                    ~RemoteDtoBase( void ) = default;
+                    ~RemoteDtoBase() = default;
 
         bool        Initialize( const size_t& inheritedClassSize );
-        bool        Update( bool loadLazy = false );
-        bool        ForceUpdate( const uintptr_t& base, bool loadLazy = false );
+        bool        Update( size_t level = 0 );
+        bool        ForceUpdate( const uintptr_t& base, size_t level = 0 );
 
     private:
 
         void        SetBase( const uintptr_t& base );
 
-        bool        UpdateData( void );
-        bool        UpdateMembers( void );
-
-        size_t      GetMaxDataSize( void );
+        bool        UpdateData();
+        bool        UpdateMembers( size_t level );
     };
 }
 

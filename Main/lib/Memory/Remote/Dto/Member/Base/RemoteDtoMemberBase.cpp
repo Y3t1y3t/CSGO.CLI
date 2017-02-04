@@ -7,12 +7,12 @@ namespace Memory
     {
     }
 
-    size_t RemoteDtoMemberBase::GetOffset( void ) const
+    size_t RemoteDtoMemberBase::GetOffset() const
     {
         return _offset;
     }
 
-    size_t RemoteDtoMemberBase::GetDataSize( void ) const
+    size_t RemoteDtoMemberBase::GetDataSize() const
     {
         return GetOffset() + GetSize();
     }

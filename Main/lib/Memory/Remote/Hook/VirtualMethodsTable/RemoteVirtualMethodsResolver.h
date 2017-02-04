@@ -16,9 +16,9 @@ namespace Memory
     public:
 
         explicit RemoteVirtualMethodsResolver( SharedRemoteProcessService remoteProcessService );
-        ~RemoteVirtualMethodsResolver( void ) = default;
+        ~RemoteVirtualMethodsResolver() = default;
 
-        bool Resolve( const uintptr_t& virtualMethodsTablePtr, std::vector<uintptr_t>* virtualMethods ) const;
+        bool Resolve( const uintptr_t& virtualMethodsTablePtr, std::vector<uintptr_t>* virtualMethods ) const; // TODO: Read In BULK
     };
 }
 

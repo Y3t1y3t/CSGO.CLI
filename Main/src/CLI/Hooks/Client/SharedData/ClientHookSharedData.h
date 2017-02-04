@@ -11,7 +11,7 @@ namespace CLI
     {
     public:
         explicit ClientHookSharedData( const uintptr_t& virtualMethodsTablePtr = 0x0, HANDLE sharedOriginProcessHandle = nullptr );
-        ~ClientHookSharedData( void ) = default;
+        ~ClientHookSharedData() = default;
 
         class CreateMoveVirtualMethod : public VirtualMethodData
         {

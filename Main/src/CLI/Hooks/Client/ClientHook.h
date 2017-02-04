@@ -21,7 +21,7 @@ namespace CLI
         ClientHook( Memory::SharedRemoteProcessService remoteProcessService,
                     Memory::SharedRemoteFunctionService remoteFunctionService,
                     Memory::SharedRemoteHookService remoteHookService );
-        ~ClientHook( void ) = default;
+        ~ClientHook() = default;
 
         bool Register( const uintptr_t& instance, const HANDLE& sharedOriginProcessHandle ) override;
     };

@@ -2,7 +2,7 @@
 
 namespace Memory
 {
-    RemoteHookSharedDataBase::Imports::Kernel32::Kernel32( void )
+    RemoteHookSharedDataBase::Imports::Kernel32::Kernel32()
     {
         auto module = GetModuleHandleA( "kernel32.dll" );
 

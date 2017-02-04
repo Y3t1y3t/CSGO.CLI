@@ -20,7 +20,7 @@ namespace Memory
         };
 
         explicit RemoteVirtualMethodsTableHookSharedData( const uintptr_t& virtualMethodsTablePtr, HANDLE sharedOriginProcessHandle );
-        ~RemoteVirtualMethodsTableHookSharedData( void ) = default;
+        ~RemoteVirtualMethodsTableHookSharedData() = default;
 
         Imports     Imports;
 

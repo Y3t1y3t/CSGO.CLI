@@ -20,13 +20,13 @@ namespace Memory
     public:
 
         explicit        RemoteDtoMemberBase( const size_t& offset );
-        virtual         ~RemoteDtoMemberBase( void ) = default;
+        virtual         ~RemoteDtoMemberBase() = default;
 
-        virtual bool    OnUpdate( SharedRemoteProcessService remoteProcessService, std::vector<byte>* data ) = 0;
-        virtual size_t  GetSize( void ) const = 0;
+        virtual bool    OnUpdate( SharedRemoteProcessService remoteProcessService, size_t level, std::vector<byte>* data ) = 0;
+        virtual size_t  GetSize() const = 0;
 
-        size_t          GetOffset( void ) const;
-        size_t          GetDataSize( void ) const;
+        size_t          GetOffset() const;
+        size_t          GetDataSize() const;
     };
 }
 

@@ -12,13 +12,13 @@ namespace CSGO
         if( paramsPtr != nullptr ) {
             auto params = static_cast< GetAllClassesParams* >( paramsPtr );
 
-            typedef uintptr_t( __thiscall* GetAllClassesFn )( uintptr_t );
+            using GetAllClassesFn = uintptr_t( __thiscall* )( uintptr_t );
             params->Result = GetAllClassesFn( ( *reinterpret_cast< DWORD** >( params->Instance ) )[ 8 ] )( params->Instance );
         }
         return 0;
     }
 
-    uintptr_t Client::GetAllClasses( void )
+    uintptr_t Client::GetAllClasses()
     {
         auto params = Remote::GetAllClassesParams( _instance );
         if( _getAllClasses == nullptr && !_remoteFunctionService->Create( Remote::GetAllClasses, &params, sizeof( Remote::GetAllClassesParams ), &_getAllClasses ) )

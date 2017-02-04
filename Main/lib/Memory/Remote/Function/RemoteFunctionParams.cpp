@@ -2,7 +2,7 @@
 
 namespace Memory
 {
-    RemoteFunctionParams::Imports::Kernel32::Kernel32( void )
+    RemoteFunctionParams::Imports::Kernel32::Kernel32()
     {
         auto module = ::GetModuleHandleA( "kernel32.dll" );
 

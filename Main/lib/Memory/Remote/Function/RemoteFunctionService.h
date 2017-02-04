@@ -13,7 +13,7 @@ namespace Memory
 {
     class RemoteFunctionService;
 
-    typedef std::shared_ptr<RemoteFunctionService> SharedRemoteFunctionService;
+    using SharedRemoteFunctionService = std::shared_ptr<RemoteFunctionService>;
 
     class RemoteFunctionService
     {

@@ -15,16 +15,16 @@ namespace Memory
             class Kernel32
             {
             public:
-                Kernel32( void );
-                ~Kernel32( void ) = default;
+                Kernel32();
+                ~Kernel32() = default;
 
-                typedef FARPROC( __stdcall *GetProcAddressFn )( HMODULE module, LPCSTR lpProcName );
+                using GetProcAddressFn = FARPROC( __stdcall * )( HMODULE module, LPCSTR lpProcName );
                 GetProcAddressFn GetProcAddress;
 
-                typedef HMODULE( __stdcall *GetModuleHandleAFn )( LPCSTR moduleName );
+                using GetModuleHandleAFn = HMODULE( __stdcall * )( LPCSTR moduleName );
                 GetModuleHandleAFn GetModuleHandleA;
 
-                typedef void( __stdcall *SleepFn )( DWORD dwMilliseconds );
+                using SleepFn = void( __stdcall * )( DWORD dwMilliseconds );
                 SleepFn Sleep;
             } Kernel32;
         } Imports;

@@ -23,7 +23,7 @@ namespace CSGO
     public:
 
         explicit InterfacesService( Memory::SharedRemoteFunctionService remoteFunctionService );
-        ~InterfacesService( void ) = default;
+        ~InterfacesService() = default;
 
     private:
 
@@ -34,9 +34,9 @@ namespace CSGO
             {
             public:
                 GetInterfaceParams( const std::string& moduleName, const std::string& interfaceVersion );
-                ~GetInterfaceParams( void ) = default;
+                ~GetInterfaceParams() = default;
 
-                typedef uintptr_t( __cdecl* CreateInterfaceFn )( const char*, uintptr_t* );
+                using CreateInterfaceFn = uintptr_t( __cdecl* )( const char*, uintptr_t* );
                 const char CreateInterface[ 16 ] = "CreateInterface";
 
                 struct Module
@@ -58,7 +58,7 @@ namespace CSGO
     public:
 
         template<class T>
-        bool Register( std::unique_ptr<T>* i );
+        bool Register( std::unique_ptr<T>* interfacePtr );
     };
 
     template <class T>
@@ -67,7 +67,7 @@ namespace CSGO
         *interfacePtr = std::make_unique<T>( _remoteFunctionService );
 
         auto params = Remote::GetInterfaceParams( ( *interfacePtr )->GetModuleName(), ( *interfacePtr )->GetInterfaceVersion() );
-        if( _getInterfaces == nullptr 
+        if( _getInterfaces == nullptr
             && !_remoteFunctionService->Create( Remote::GetInterface, &params, sizeof( Remote::GetInterfaceParams ), &_getInterfaces )
             || !_getInterfaces->SetDataPtrValue( params ) )
             return false;
@@ -75,10 +75,12 @@ namespace CSGO
         if( !_remoteFunctionService->Execute( _getInterfaces ) )
             return false;
 
-        if( !_getInterfaces->GetDataPtrValue( &params ) )
+        if( !_getInterfaces->GetDataPtrValue( &params )
+            || params.Interface.Instance == 0x0 )
             return false;
 
-        return ( *( ( *interfacePtr )->GetInstance() ) = params.Interface.Instance ) != 0x0;
+        ( *interfacePtr )->SetInstance( params.Interface.Instance );
+        return true;
     }
 }
 

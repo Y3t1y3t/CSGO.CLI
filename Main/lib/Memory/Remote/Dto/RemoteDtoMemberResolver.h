@@ -6,6 +6,8 @@
 #include "Member/Base/RemoteDtoMemberBase.h"
 #include "Base/RemoteDtoBase.h"
 
+#include <list>
+
 namespace Memory
 {
     class RemoteDtoMemberResolver
@@ -15,7 +17,7 @@ namespace Memory
 
     public:
 
-        bool Parse( const uintptr_t& baseClassPtr, size_t inheritedClassSize, std::vector<RemoteDtoMemberBase*> *members ) const;
+        bool Resolve( const uintptr_t& baseClassPtr, size_t inheritedClassSize, size_t *maxDataSize, std::list<RemoteDtoMemberBase*> *members ) const;
     };
 }
 

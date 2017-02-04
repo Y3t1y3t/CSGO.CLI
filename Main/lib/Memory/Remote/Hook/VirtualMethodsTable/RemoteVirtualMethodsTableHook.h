@@ -8,7 +8,6 @@
 #include "../../Process/RemoteProcessService.h"
 
 #include <vector>
-#include <iostream>
 
 namespace Memory
 {
@@ -32,27 +31,27 @@ namespace Memory
     public:
 
         explicit RemoteVirtualMethodsTableHook( SharedRemoteProcessService remoteProcessService, const uintptr_t& virtualMethodsTablePtr, std::vector<uintptr_t>& virtualMethods, const uintptr_t& sharedDataPtr, const size_t& sharedDataSize );
-        ~RemoteVirtualMethodsTableHook( void );
+        ~RemoteVirtualMethodsTableHook();
 
-        void        SetTableHook( void ) const;
-        void        RemoveTableHook( void ) const;
+        void        SetTableHook() const;
+        void        RemoveTableHook() const;
 
         template<class T>
         bool        SetVirtualMethodHook( RemoteVirtualMethodHookBase* virtualMethodHook );
 
     private:
 
-        bool        IsValidSharedDataPtr( void ) const;
+        bool        IsValidSharedDataPtr() const;
 
-        uintptr_t   GetVirtualMethodsPtr( void ) const;
+        uintptr_t   GetVirtualMethodsPtr() const;
 
         uintptr_t   GetVirtualMethodPtr( const size_t& index ) const;
         void        SetVirtualMethodPtr( const size_t& index, const uintptr_t& virtualMethodPtr ) const;
 
-        uintptr_t   GetSharedDataPtr( void ) const;
+        uintptr_t   GetSharedDataPtr() const;
         void        SetSharedDataPtr( const uintptr_t& sharedDataPtr );
 
-        size_t      GetSharedDataSize( void ) const;
+        size_t      GetSharedDataSize() const;
 
         template<class T>
         bool        GetSharedDataPtrValue( T* out );

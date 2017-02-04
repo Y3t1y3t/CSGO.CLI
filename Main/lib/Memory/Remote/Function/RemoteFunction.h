@@ -16,15 +16,15 @@ namespace Memory
     public:
 
         explicit RemoteFunction( SharedRemoteProcessService remoteProcessService = nullptr, LPVOID function = nullptr, LPVOID data = nullptr );
-        ~RemoteFunction( void );
+        ~RemoteFunction();
 
-        bool    IsValidFunctionPtr( void ) const;
-        bool    IsValidDataPtr( void ) const;
+        bool    IsValidFunctionPtr() const;
+        bool    IsValidDataPtr() const;
 
-        LPVOID  GetFunctionPtr( void ) const;
+        LPVOID  GetFunctionPtr() const;
         void    SetFunctionPtr( LPVOID functionPtr );
 
-        LPVOID  GetDataPtr( void ) const;
+        LPVOID  GetDataPtr() const;
         void    SetDataPtr( LPVOID dataPtr );
 
         template<class T>

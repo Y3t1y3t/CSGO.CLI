@@ -13,13 +13,13 @@ namespace Memory
 {
     class RemoteProcessService;
 
-    typedef std::shared_ptr<RemoteProcessService> SharedRemoteProcessService;
+    using SharedRemoteProcessService = std::shared_ptr<RemoteProcessService>;
 
     class RemoteProcessParamsDto
     {
     public:
         RemoteProcessParamsDto( const std::string& processName, const std::string& windowName = std::string(), const std::string& windowClassName = std::string(), DWORD accessRights = PROCESS_REMOTE );
-        ~RemoteProcessParamsDto( void ) = default;
+        ~RemoteProcessParamsDto() = default;
 
         DWORD       AccessRights;
         std::string ProcessName;
@@ -31,7 +31,7 @@ namespace Memory
     {
     public:
         explicit RemoteProcessDto( RemoteProcessParamsDto dto );
-        ~RemoteProcessDto( void ) = default;
+        ~RemoteProcessDto() = default;
 
         DWORD       Id;
         HANDLE      Handle;
@@ -43,11 +43,11 @@ namespace Memory
 
     public:
 
-        RemoteProcessService( void ) = default;
-        ~RemoteProcessService( void );
+        RemoteProcessService() = default;
+        ~RemoteProcessService();
 
         bool                        Attach( const RemoteProcessParamsDto& process );
-        void                        Detach( void );
+        void                        Detach();
 
         LPVOID                      AllocRemoteData( const byte* data, size_t size ) const;
         bool                        DeallocRemoteData( LPVOID entryPoint ) const;
@@ -62,14 +62,14 @@ namespace Memory
         template<class T> bool      Write( LPVOID ptr, const T& in ) const;
         template<class T> bool      Write( const uintptr_t& ptr, const T& in ) const;
 
-        bool                        IsValid( void );
+        bool                        IsValid();
 
-        RemoteProcessDto&           Get( void );
+        RemoteProcessDto&           Get();
 
     private:
 
-        bool                        GetProcessId( void );
-        bool                        GetProcessHandle( void );
+        bool                        GetProcessId();
+        bool                        GetProcessHandle();
     };
 
     template <class T>

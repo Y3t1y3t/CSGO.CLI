@@ -9,7 +9,7 @@ namespace Memory
     {
     }
 
-    RemoteFunction::~RemoteFunction( void )
+    RemoteFunction::~RemoteFunction()
     {
         if( _functionPtr != nullptr ) {
             _remoteProcessService->DeallocRemoteData( _functionPtr );
@@ -21,17 +21,17 @@ namespace Memory
         }
     }
 
-    bool RemoteFunction::IsValidFunctionPtr( void ) const
+    bool RemoteFunction::IsValidFunctionPtr() const
     {
         return _functionPtr != nullptr;
     }
 
-    bool RemoteFunction::IsValidDataPtr( void ) const
+    bool RemoteFunction::IsValidDataPtr() const
     {
         return _dataPtr != nullptr;
     }
 
-    LPVOID RemoteFunction::GetFunctionPtr( void ) const
+    LPVOID RemoteFunction::GetFunctionPtr() const
     {
         return _functionPtr;
     }
@@ -41,7 +41,7 @@ namespace Memory
         _functionPtr = functionPtr;
     }
 
-    LPVOID RemoteFunction::GetDataPtr( void ) const
+    LPVOID RemoteFunction::GetDataPtr() const
     {
         return _dataPtr;
     }

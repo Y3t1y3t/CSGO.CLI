@@ -112,8 +112,9 @@
     <ClCompile Include="src\CLI\Hooks\Base\HookBase.cpp" />
     <ClCompile Include="src\CLI\Hooks\HooksService.cpp" />
     <ClCompile Include="src\CLI\Main.cpp" />
-    <ClCompile Include="src\CSGO\ClientClass\ClientClass.cpp" />
+    <ClCompile Include="src\CSGO\ClientClass\Dtos\ClientClassDto.cpp" />
     <ClCompile Include="src\CSGO\ClientClass\ClientClassService.cpp" />
+    <ClCompile Include="src\CSGO\ClientClass\Dtos\RecvTableDto.cpp" />
     <ClCompile Include="src\CSGO\Interfaces\Client\Client.cpp" />
     <ClCompile Include="src\CSGO\Interfaces\Base\InterfaceBase.cpp" />
     <ClCompile Include="src\CSGO\Interfaces\Engine\EngineClient.cpp" />
@@ -121,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\Memory\Remote\Dto\Member\Base\RemoteDtoMemberBase.h" />
+    <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoPtrArrayMember.h" />
     <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoPtrMember.h" />
     <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimpleMember.h" />
     <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoSimplePtrMember.h" />
@@ -145,8 +147,9 @@
     <ClInclude Include="src\CLI\Hooks\Client\VirtualMethods\CreateMoveVirtualMethodHook.h" />
     <ClInclude Include="src\CLI\Hooks\Base\HookBase.h" />
     <ClInclude Include="src\CLI\Hooks\HooksService.h" />
-    <ClInclude Include="src\CSGO\ClientClass\ClientClass.h" />
+    <ClInclude Include="src\CSGO\ClientClass\Dtos\ClientClassDto.h" />
     <ClInclude Include="src\CSGO\ClientClass\ClientClassService.h" />
+    <ClInclude Include="src\CSGO\ClientClass\Dtos\RecvTableDto.h" />
     <ClInclude Include="src\CSGO\Interfaces\Client\Client.h" />
     <ClInclude Include="src\CSGO\Interfaces\Base\InterfaceBase.h" />
     <ClInclude Include="src\CSGO\Interfaces\Engine\EngineClient.h" />

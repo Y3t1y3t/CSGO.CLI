@@ -14,7 +14,7 @@ namespace Memory
     public:
 
         explicit RemoteFunctionExecuter( SharedRemoteProcessService remoteProcessService );
-        ~RemoteFunctionExecuter( void ) = default;
+        ~RemoteFunctionExecuter() = default;
 
         bool Execute( const std::unique_ptr<RemoteFunction>& data ) const;
     };

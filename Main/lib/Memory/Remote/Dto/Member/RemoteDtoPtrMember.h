@@ -18,7 +18,7 @@ namespace Memory
         explicit    RemoteDtoPtrMember( const size_t& offset );
 
     #pragma region InlinedFunctions
-        bool OnUpdate( SharedRemoteProcessService remoteProcessService, std::vector<byte>* data ) override
+        bool OnUpdate( SharedRemoteProcessService remoteProcessService, size_t level, std::vector<byte>* data ) override
         {
             _ptrValue = *reinterpret_cast< uintptr_t* >( &data->at( GetOffset() ) );
             if( _ptrValue == 0x0 )
@@ -26,13 +26,13 @@ namespace Memory
 
             if( _dtoPtr == nullptr )
                 _dtoPtr = std::make_unique<T>( remoteProcessService, _ptrValue );
-            return _dtoPtr->ForceUpdate( _ptrValue, true ); // TODO: Handle Infinite-Loop
+            return _dtoPtr->ForceUpdate( _ptrValue, level );
         }
 
-        size_t GetSize( void ) const override { return sizeof( T* ); }
+        size_t GetSize() const override { return sizeof( T* ); }
     #pragma endregion
 
-        T* GetPtr( void );
+        T* GetPtr();
     };
 
     template <class T>
@@ -43,7 +43,7 @@ namespace Memory
     }
 
     template <class T>
-    T* RemoteDtoPtrMember<T>::GetPtr( void )
+    T* RemoteDtoPtrMember<T>::GetPtr()
     {
         if( _ptrValue == 0x0 )
             return nullptr;

@@ -242,7 +242,6 @@ ModelManifest.xml
 .fake/
 Main/lib/Logging/
 Main/lib/Hooking/
-Main/lib/Util/
 Main/lib/D3D/
 Main/lib/Flags/
 Main/lib/Memory/VMT.h

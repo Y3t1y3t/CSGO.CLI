@@ -105,6 +105,9 @@
     <ClCompile Include="src\CSGO\ClientClass\Dtos\RecvTableDto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Handle\RemoteHandleService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunction.h">
@@ -204,6 +207,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoPtrArrayMember.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Handle\RemoteHandleService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Util\NT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

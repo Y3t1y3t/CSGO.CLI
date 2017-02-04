@@ -104,6 +104,7 @@
     <ClCompile Include="lib\Memory\Remote\Hook\Base\SharedData\RemoteHookSharedDataBase.cpp" />
     <ClCompile Include="lib\Memory\Remote\Hook\VirtualMethodsTable\SharedData\RemoteVirtualMethodsTableHookSharedData.cpp" />
     <ClCompile Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsTableHook.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Handle\RemoteHandleService.cpp" />
     <ClCompile Include="lib\Memory\Remote\Process\RemoteProcessService.cpp" />
     <ClCompile Include="lib\Memory\Remote\Dto\Base\RemoteDtoBase.cpp" />
     <ClCompile Include="src\CLI\Hooks\Client\ClientHook.cpp" />
@@ -140,8 +141,10 @@
     <ClInclude Include="lib\Memory\Remote\Hook\Base\SharedData\RemoteHookSharedDataBase.h" />
     <ClInclude Include="lib\Memory\Remote\Hook\VirtualMethodsTable\SharedData\RemoteVirtualMethodsTableHookSharedData.h" />
     <ClInclude Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsTableHook.h" />
+    <ClInclude Include="lib\Memory\Remote\Handle\RemoteHandleService.h" />
     <ClInclude Include="lib\Memory\Remote\Process\RemoteProcessService.h" />
     <ClInclude Include="lib\Memory\Remote\Dto\Base\RemoteDtoBase.h" />
+    <ClInclude Include="lib\Util\NT.h" />
     <ClInclude Include="src\CLI\Hooks\Client\ClientHook.h" />
     <ClInclude Include="src\CLI\Hooks\Client\SharedData\ClientHookSharedData.h" />
     <ClInclude Include="src\CLI\Hooks\Client\VirtualMethods\CreateMoveVirtualMethodHook.h" />

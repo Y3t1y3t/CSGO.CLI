@@ -74,7 +74,7 @@ namespace Memory
     HANDLE RemoteProcessService::GetSharedHandle( HANDLE handle, DWORD accessRights ) const
     {
         HANDLE duplicatedHandle;
-        if( DuplicateHandle( handle, handle, _process.Handle, &duplicatedHandle, accessRights, FALSE, NULL ) != FALSE )
+        if( DuplicateHandle( handle, handle, _process.Handle, &duplicatedHandle, accessRights, FALSE, DUPLICATE_CLOSE_SOURCE ) != FALSE )
             return duplicatedHandle;
         return nullptr;
     }

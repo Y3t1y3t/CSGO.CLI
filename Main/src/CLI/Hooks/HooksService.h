@@ -26,7 +26,7 @@ namespace CLI
 
         HooksService( Memory::SharedRemoteProcessService remoteProcessService,
                Memory::SharedRemoteFunctionService remoteFunctionService );
-        ~HooksService() = default;
+        ~HooksService();
 
         template<class T>
         bool Register( const uintptr_t& instance );

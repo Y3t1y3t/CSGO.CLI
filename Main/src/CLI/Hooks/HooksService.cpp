@@ -12,4 +12,10 @@ namespace CLI
         auto originProcessHandle = OpenProcess( PROCESS_REMOTE, FALSE, GetCurrentProcessId() );
         _sharedOriginProcessHandle = remoteProcessService->GetSharedHandle( originProcessHandle );
     }
+
+    HooksService::~HooksService()
+    {
+        if( _sharedOriginProcessHandle != INVALID_HANDLE_VALUE )
+            CloseHandle( _sharedOriginProcessHandle );
+    }
 }

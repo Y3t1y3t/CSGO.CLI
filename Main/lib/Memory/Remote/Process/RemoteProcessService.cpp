@@ -1,22 +1,15 @@
 ﻿#include "RemoteProcessService.h"
 
 #include <TlHelp32.h>
+#include <thread>
 
 namespace Memory
 {
-    RemoteProcessParamsDto::RemoteProcessParamsDto( const std::string& processName, const std::string& windowName, const std::string& windowClassName, DWORD accessRights )
+    RemoteProcessService::RemoteProcessService() :
+        _remoteProcessIdProvider( std::make_unique<RemoteProcessIdProvider>() ),
+        _remoteProcessHandleProvider( std::make_unique<RemoteProcessHandleProvider>() ),
+        _process( nullptr )
     {
-        ProcessName = processName;
-        WindowName = windowName;
-        WindowClassName = windowClassName;
-        AccessRights = accessRights;
-    }
-
-    RemoteProcessDto::RemoteProcessDto( RemoteProcessParamsDto dto )
-        : RemoteProcessParamsDto( dto )
-    {
-        Id = 0;
-        Handle = INVALID_HANDLE_VALUE;
     }
 
     RemoteProcessService::~RemoteProcessService()
@@ -28,104 +21,97 @@ namespace Memory
     {
         Detach();
 
-        _process = RemoteProcessDto( process );
+        _process = std::make_unique<RemoteProcessDto>( process );
 
-        auto curtime = GetTickCount64();
+        auto startTick = GetTickCount64();
+        auto maxRetryTicks = 1000 * 60 * 5;
+
         do {
-            if( !GetProcessId() )
+            if( !GetProcessId( &_process->Id ) )
                 continue;
-            if( !GetProcessHandle() )
+            if( !GetProcessHandle( &_process->Handle ) )
                 continue;
             return true;
-        } while( ( 1000 * 60 * 5 != 0 ? ( GetTickCount64() - curtime ) <= 1000 * 60 * 5 : true ) );
-
+        } while( ![ & ] ( ULONGLONG currentTick ) -> bool {
+            auto result = !( maxRetryTicks != 0 ? currentTick - startTick <= maxRetryTicks : true );
+            if( !result )
+                std::this_thread::sleep_for( std::chrono::milliseconds( 250 ) );
+            return result;
+        }( GetTickCount64() ) );
         return false;
     }
 
-    void RemoteProcessService::Detach()
+    void RemoteProcessService::Detach() const
     {
-        if( _process.Handle != INVALID_HANDLE_VALUE )
-            CloseHandle( _process.Handle );
-
-        _process = RemoteProcessDto( { std::string() } );
+        if( _process != nullptr )
+            _process->Invalidate();
     }
 
     LPVOID RemoteProcessService::AllocRemoteData( const byte* data, size_t size ) const
     {
-        auto remoteData = VirtualAllocEx( _process.Handle, nullptr, size, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE );
+        if( !_process->IsValid() )
+            return nullptr;
+
+        auto remoteData = VirtualAllocEx( _process->Handle, nullptr, size, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE );
         if( remoteData == nullptr )
             return nullptr;
 
-        if( WriteProcessMemory( _process.Handle, remoteData, data, size, nullptr ) == FALSE )
+        if( WriteProcessMemory( _process->Handle, remoteData, data, size, nullptr ) == FALSE )
             return nullptr;
+
         return remoteData;
     }
 
     bool RemoteProcessService::DeallocRemoteData( LPVOID entryPoint ) const
     {
-        return VirtualFreeEx( _process.Handle, entryPoint, 0, MEM_RELEASE ) != FALSE;
+        if( !_process->IsValid() )
+            return false;
+        return VirtualFreeEx( _process->Handle, entryPoint, 0, MEM_RELEASE ) != FALSE;
     }
 
     HANDLE RemoteProcessService::StartRemoteThread( LPVOID entryPoint, LPVOID data ) const
     {
-        return CreateRemoteThread( _process.Handle, nullptr, NULL, static_cast< LPTHREAD_START_ROUTINE >( entryPoint ), data, NULL, nullptr );
+        if( !_process->IsValid() )
+            return nullptr;
+        return CreateRemoteThread( _process->Handle, nullptr, NULL, static_cast< LPTHREAD_START_ROUTINE >( entryPoint ), data, NULL, nullptr );
     }
 
-    HANDLE RemoteProcessService::GetSharedHandle( HANDLE handle, DWORD accessRights ) const
+    bool RemoteProcessService::GetSharedHandle( HANDLE handle, DWORD accessRights, HANDLE *duplicatedHandle ) const
     {
-        HANDLE duplicatedHandle;
-        if( DuplicateHandle( handle, handle, _process.Handle, &duplicatedHandle, accessRights, FALSE, NULL ) != FALSE )
-            return duplicatedHandle;
-        return nullptr;
+        if( !_process->IsValid() )
+            return false;
+        return DuplicateHandle( handle, handle, _process->Handle, duplicatedHandle, accessRights, FALSE, NULL ) != FALSE;
     }
 
     bool RemoteProcessService::Read( const uintptr_t& ptr, LPVOID out, const size_t& size ) const
     {
-        return ReadProcessMemory( _process.Handle, LPCVOID( ptr ), out, size, nullptr ) != FALSE;
-    }
-
-    bool RemoteProcessService::IsValid()
-    {
-        _process.Id = 0;
-        return GetProcessId();
-    }
-
-    RemoteProcessDto& RemoteProcessService::Get()
-    {
-        return _process;
-    }
-
-    bool RemoteProcessService::GetProcessId()
-    {
-        if( _process.WindowName.empty() && _process.WindowClassName.empty() ) {
-            auto hSnapshot = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
-            if( !hSnapshot )
-                return false;
-
-            PROCESSENTRY32 pe32 = { sizeof( PROCESSENTRY32 ) };
-            if( Process32First( hSnapshot, &pe32 ) == TRUE ) {
-                do {
-                    if( pe32.szExeFile == _process.ProcessName )
-                        _process.Id = pe32.th32ProcessID;
-                } while( Process32Next( hSnapshot, &pe32 ) == TRUE && _process.Id == 0 );
-            }
-
-            CloseHandle( hSnapshot );
-        }
-        else {
-            auto hWin = FindWindowA(
-                _process.WindowClassName.empty() ? NULL : _process.WindowClassName.c_str(),
-                _process.WindowName.empty() ? NULL : _process.WindowName.c_str() );
-            if( hWin )
-                GetWindowThreadProcessId( hWin, &_process.Id );
-        }
-        return bool( _process.Id != 0 );
-    }
-
-    bool RemoteProcessService::GetProcessHandle()
-    {
-        if( _process.Id == 0 )
+        if( !_process->IsValid() )
             return false;
-        return bool( ( _process.Handle = OpenProcess( _process.AccessRights, FALSE, _process.Id ) ) != INVALID_HANDLE_VALUE );
+        return ReadProcessMemory( _process->Handle, LPCVOID( ptr ), out, size, nullptr ) != FALSE;
+    }
+
+    bool RemoteProcessService::Write( const uintptr_t& ptr, LPCVOID in, const size_t& size ) const
+    {
+        if( !_process->IsValid() )
+            return false;
+        return WriteProcessMemory( _process->Handle, LPVOID( ptr ), in, size, nullptr ) != FALSE;
+    }
+
+    bool RemoteProcessService::IsValid() const
+    {
+        DWORD processId;
+        return GetProcessId( &processId );
+    }
+
+    bool RemoteProcessService::GetProcessId( DWORD *processId ) const
+    {
+        if( _process->WindowName.empty() && _process->WindowClassName.empty() )
+            return _remoteProcessIdProvider->ProvideProcessIdByProcessName( _process->ProcessName, processId );
+        return _remoteProcessIdProvider->ProvideProcessIdByWindow( _process->WindowName, _process->WindowClassName, processId );
+    }
+
+    bool RemoteProcessService::GetProcessHandle( HANDLE *processHandle ) const
+    {
+        return _remoteProcessHandleProvider->ProvideProcessHandleByProcessIdWithAccessRights( _process->Id, _process->AccessRights, processHandle );
     }
 }

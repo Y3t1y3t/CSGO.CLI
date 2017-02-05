@@ -3,98 +3,53 @@
 
 #pragma once
 
-#include <windows.h>
-#include <string>
-#include <memory>
+#include "Dtos/RemoteProcessDto.h"
 
-#define PROCESS_REMOTE (PROCESS_VM_READ | PROCESS_VM_WRITE | PROCESS_VM_OPERATION | PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION | PROCESS_DUP_HANDLE )
+#include "Providers/RemoteProcessIdProvider.h"
+#include "Providers/RemoteProcessHandleProvider.h"
+
+#include <windows.h>
+#include <memory>
 
 namespace Memory
 {
-    class RemoteProcessService;
-
-    using SharedRemoteProcessService = std::shared_ptr<RemoteProcessService>;
-
-    class RemoteProcessParamsDto
-    {
-    public:
-        RemoteProcessParamsDto( const std::string& processName, const std::string& windowName = std::string(), const std::string& windowClassName = std::string(), DWORD accessRights = PROCESS_REMOTE );
-        ~RemoteProcessParamsDto() = default;
-
-        DWORD       AccessRights;
-        std::string ProcessName;
-        std::string WindowName;
-        std::string WindowClassName;
-    };
-
-    class RemoteProcessDto : public RemoteProcessParamsDto
-    {
-    public:
-        explicit RemoteProcessDto( RemoteProcessParamsDto dto );
-        ~RemoteProcessDto() = default;
-
-        DWORD       Id;
-        HANDLE      Handle;
-    };
-
     class RemoteProcessService
     {
-        RemoteProcessDto    _process = RemoteProcessDto( { std::string() } );
+        std::unique_ptr<RemoteProcessIdProvider>        _remoteProcessIdProvider;
+        std::unique_ptr<RemoteProcessHandleProvider>    _remoteProcessHandleProvider;
+        std::unique_ptr<RemoteProcessDto>               _process;
 
     public:
 
-        RemoteProcessService() = default;
+        RemoteProcessService();
         ~RemoteProcessService();
 
         bool                        Attach( const RemoteProcessParamsDto& process );
-        void                        Detach();
+        void                        Detach() const;
 
         LPVOID                      AllocRemoteData( const byte* data, size_t size ) const;
         bool                        DeallocRemoteData( LPVOID entryPoint ) const;
 
         HANDLE                      StartRemoteThread( LPVOID entryPoint, LPVOID data ) const;
-        HANDLE                      GetSharedHandle( HANDLE handle, DWORD accessRights = PROCESS_REMOTE ) const;
+        bool                        GetSharedHandle( HANDLE handle, DWORD accessRights, HANDLE *duplicatedHandle ) const;
 
         bool                        Read( const uintptr_t& ptr, LPVOID out, const size_t& size ) const;
-        template<class T> bool      Read( LPCVOID ptr, T* out ) const;
-        template<class T> bool      Read( const uintptr_t& ptr, T* out ) const;
+        template<class T> bool      Read( LPCVOID ptr, T* out ) const                                       { return Read( uintptr_t( ptr ), out, sizeof( T ) ); }
+        template<class T> bool      Read( const uintptr_t& ptr, T* out ) const                              { return Read( ptr, out, sizeof( T ) ); }
 
-        template<class T> bool      Write( LPVOID ptr, const T& in ) const;
-        template<class T> bool      Write( const uintptr_t& ptr, const T& in ) const;
+        bool                        Write( const uintptr_t& ptr, LPCVOID in, const size_t& size ) const;
+        template<class T> bool      Write( LPVOID ptr, const T& in ) const                                  { return Write( uintptr_t( ptr ), LPCVOID( &in ), sizeof( T ) ); }
+        template<class T> bool      Write( const uintptr_t& ptr, const T& in ) const                        { return Write( ptr, LPCVOID( &in ), sizeof( T ) ); }
 
-        bool                        IsValid();
-
-        RemoteProcessDto&           Get();
+        bool                        IsValid() const;
 
     private:
 
-        bool                        GetProcessId();
-        bool                        GetProcessHandle();
+        bool                        GetProcessId( DWORD *processId ) const;
+        bool                        GetProcessHandle( HANDLE *processHandle ) const;
     };
 
-    template <class T>
-    bool RemoteProcessService::Read( LPCVOID ptr, T* out ) const
-    {
-        return ReadProcessMemory( _process.Handle, ptr, out, sizeof( T ), nullptr ) != FALSE;
-    }
-
-    template <class T>
-    bool RemoteProcessService::Read( const uintptr_t& ptr, T* out ) const
-    {
-        return ReadProcessMemory( _process.Handle, LPCVOID( ptr ), out, sizeof( T ), nullptr ) != FALSE;
-    }
-
-    template <class T>
-    bool RemoteProcessService::Write( LPVOID ptr, const T& in ) const
-    {
-        return WriteProcessMemory( _process.Handle, ptr, LPCVOID( &in ), sizeof( T ), nullptr ) != FALSE;
-    }
-
-    template <class T>
-    bool RemoteProcessService::Write( const uintptr_t& ptr, const T& in ) const
-    {
-        return WriteProcessMemory( _process.Handle, LPVOID( ptr ), LPCVOID( &in ), sizeof( T ), nullptr ) != FALSE;
-    }
+    using SharedRemoteProcessService = std::shared_ptr<RemoteProcessService>;
 }
 
 #endif /* _MEMORY_REMOTEPROCESS_H_ */

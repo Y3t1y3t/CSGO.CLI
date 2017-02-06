@@ -9,6 +9,7 @@
 // ReSharper disable CppUnusedIncludeDirective
 #include "Client/Client.h"
 #include "Engine/EngineClient.h"
+#include "Engine/EngineVGui.h"
 // ReSharper restore CppUnusedIncludeDirective
 
 #include <memory>

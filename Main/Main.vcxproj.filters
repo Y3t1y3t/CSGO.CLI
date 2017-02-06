@@ -120,6 +120,18 @@
     <ClCompile Include="lib\Memory\Remote\Process\Providers\RemoteProcessThreadsProvider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CSGO\Interfaces\Engine\EngineVGui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CLI\Hooks\EngineVGui\SharedData\EngineVGuiHookSharedData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CLI\Hooks\EngineVGui\VirtualMethods\PaintVirtualMethodHook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CLI\Hooks\EngineVGui\EngineVGuiHook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunction.h">
@@ -237,6 +249,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\Memory\Remote\Process\Providers\RemoteProcessThreadsProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSGO\Interfaces\Engine\EngineVGui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CLI\Hooks\EngineVGui\SharedData\EngineVGuiHookSharedData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CLI\Hooks\EngineVGui\VirtualMethods\PaintVirtualMethodHook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CLI\Hooks\EngineVGui\EngineVGuiHook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

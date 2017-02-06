@@ -11,15 +11,15 @@ namespace CLI
     class HookBase
     {
     protected:
-        Memory::SharedRemoteProcessService _remoteProcessService;
+        Memory::SharedRemoteProcessService  _remoteProcessService;
         Memory::SharedRemoteFunctionService _remoteFunctionService;
-        Memory::SharedRemoteHookService _remoteHookService;
+        Memory::SharedRemoteHookService     _remoteHookService;
 
     public:
 
         HookBase( Memory::SharedRemoteProcessService remoteProcessService,
-                    Memory::SharedRemoteFunctionService remoteFunctionService,
-                    Memory::SharedRemoteHookService remoteHookService );
+                  Memory::SharedRemoteFunctionService remoteFunctionService,
+                  Memory::SharedRemoteHookService remoteHookService );
         virtual ~HookBase() = default;
 
         virtual bool Register( const uintptr_t& instance, const HANDLE& sharedOriginProcessHandle ) = 0;

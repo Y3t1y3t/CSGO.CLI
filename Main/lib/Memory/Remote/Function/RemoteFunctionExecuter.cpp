@@ -12,8 +12,8 @@ namespace Memory
         if( !function->IsValidFunctionPtr() )
             return false;
 
-        auto remoteThreadHandle = _remoteProcessService->StartRemoteThread( function->GetFunctionPtr(), function->GetDataPtr() );
-        if( remoteThreadHandle == nullptr )
+        auto remoteThreadHandle = HANDLE( nullptr );
+        if( !_remoteProcessService->CreateRemoteThread( function->GetFunctionPtr(), function->GetDataPtr(), &remoteThreadHandle ) )
             return false;
 
         if( WaitForSingleObject( remoteThreadHandle, INFINITE ) != WAIT_OBJECT_0 )

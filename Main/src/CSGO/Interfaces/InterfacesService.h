@@ -22,7 +22,7 @@ namespace CSGO
 
     public:
 
-        explicit InterfacesService( Memory::SharedRemoteFunctionService remoteFunctionService );
+        explicit    InterfacesService( Memory::SharedRemoteFunctionService remoteFunctionService );
         ~InterfacesService() = default;
 
     private:
@@ -75,12 +75,11 @@ namespace CSGO
         if( !_remoteFunctionService->Execute( _getInterfaces ) )
             return false;
 
-        if( !_getInterfaces->GetDataPtrValue( &params )
-            || params.Interface.Instance == 0x0 )
+        if( !_getInterfaces->GetDataPtrValue( &params ) )
             return false;
 
         ( *interfacePtr )->SetInstance( params.Interface.Instance );
-        return true;
+        return ( *interfacePtr )->GetInstance() != 0x0;
     }
 }
 

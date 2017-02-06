@@ -2,7 +2,7 @@
 
 #include "../SharedData/ClientHookSharedData.h"
 
-#include <iostream>
+#include <iostream> //TODO: Remove
 
 namespace CLI
 {
@@ -47,6 +47,7 @@ namespace CLI
     void CreateMoveVirtualMethodHook::VirtualMethodCallback( void* _ecx, void*, size_t number, float input, bool active )
     {
         if( _ecx != nullptr ) {
+
             auto sharedData = reinterpret_cast< ClientHookSharedData* >( *reinterpret_cast< uintptr_t* >( _ecx ) - sizeof( ClientHookSharedData ) );
 
             using CreateMoveFn = void( __thiscall* )( uintptr_t, size_t, float, bool );

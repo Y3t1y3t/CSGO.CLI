@@ -80,12 +80,14 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <Optimization>Full</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -105,11 +107,12 @@
     <ClCompile Include="lib\Memory\Remote\Hook\VirtualMethodsTable\SharedData\RemoteVirtualMethodsTableHookSharedData.cpp" />
     <ClCompile Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsTableHook.cpp" />
     <ClCompile Include="lib\Memory\Remote\Process\Dtos\RemoteProcessDto.cpp" />
-    <ClCompile Include="lib\Memory\Remote\Process\Dtos\RemoteProcessParamsDto.cpp" />
-    <ClCompile Include="lib\Memory\Remote\Process\Providers\RemoteProcessHandleProvider.cpp" />
-    <ClCompile Include="lib\Memory\Remote\Process\Providers\RemoteProcessIdProvider.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Process\Dtos\RemoteProcessModuleDto.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Process\Factories\RemoteProcessDtoFactory.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Process\Factories\RemoteProcessModuleDtoFactory.cpp" />
     <ClCompile Include="lib\Memory\Remote\Process\RemoteProcessService.cpp" />
     <ClCompile Include="lib\Memory\Remote\Dto\Base\RemoteDtoBase.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Process\Providers\RemoteProcessThreadsProvider.cpp" />
     <ClCompile Include="src\CLI\Hooks\Client\ClientHook.cpp" />
     <ClCompile Include="src\CLI\Hooks\Client\SharedData\ClientHookSharedData.cpp" />
     <ClCompile Include="src\CLI\Hooks\Client\VirtualMethods\CreateMoveVirtualMethodHook.cpp" />
@@ -145,12 +148,13 @@
     <ClInclude Include="lib\Memory\Remote\Hook\VirtualMethodsTable\SharedData\RemoteVirtualMethodsTableHookSharedData.h" />
     <ClInclude Include="lib\Memory\Remote\Hook\VirtualMethodsTable\RemoteVirtualMethodsTableHook.h" />
     <ClInclude Include="lib\Memory\Remote\Process\Dtos\RemoteProcessDto.h" />
-    <ClInclude Include="lib\Memory\Remote\Process\Dtos\RemoteProcessParamsDto.h" />
     <ClInclude Include="lib\Memory\Remote\Process\Consts\RemoteProcessConsts.h" />
-    <ClInclude Include="lib\Memory\Remote\Process\Providers\RemoteProcessHandleProvider.h" />
-    <ClInclude Include="lib\Memory\Remote\Process\Providers\RemoteProcessIdProvider.h" />
+    <ClInclude Include="lib\Memory\Remote\Process\Dtos\RemoteProcessModuleDto.h" />
+    <ClInclude Include="lib\Memory\Remote\Process\Factories\RemoteProcessDtoFactory.h" />
+    <ClInclude Include="lib\Memory\Remote\Process\Factories\RemoteProcessModuleDtoFactory.h" />
     <ClInclude Include="lib\Memory\Remote\Process\RemoteProcessService.h" />
     <ClInclude Include="lib\Memory\Remote\Dto\Base\RemoteDtoBase.h" />
+    <ClInclude Include="lib\Memory\Remote\Process\Providers\RemoteProcessThreadsProvider.h" />
     <ClInclude Include="src\CLI\Hooks\Client\ClientHook.h" />
     <ClInclude Include="src\CLI\Hooks\Client\SharedData\ClientHookSharedData.h" />
     <ClInclude Include="src\CLI\Hooks\Client\VirtualMethods\CreateMoveVirtualMethodHook.h" />

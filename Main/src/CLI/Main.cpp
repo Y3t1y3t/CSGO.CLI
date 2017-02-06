@@ -1,4 +1,5 @@
 #include "Hooks/Client/ClientHook.h"
+
 #include "Hooks/HooksService.h"
 
 #include "../CSGO/Interfaces/InterfacesService.h"
@@ -13,7 +14,7 @@ int main()
     auto remoteProcessService = std::make_shared<Memory::RemoteProcessService>();
     auto remoteFuntionService = std::make_shared<Memory::RemoteFunctionService>( remoteProcessService );
 
-    if( !remoteProcessService->Attach( Memory::RemoteProcessParamsDto( "csgo.exe", "Counter-Strike: Global Offensive" ) ) ) {
+    if( !remoteProcessService->Attach("csgo.exe", "Counter-Strike: Global Offensive" ) ) {
         std::cout << "failed to attach." << std::endl;
         system( "pause" );
         return -1;
@@ -27,18 +28,19 @@ int main()
         return -2;
     }
 
-    auto clientClassService = std::make_unique<CSGO::ClientClassService>( remoteProcessService, CSGO::gClient->GetAllClasses() );
-
-    std::cout << std::hex << clientClassService->GetRecvPropOffset( "DT_BaseEntity", "m_vecOrigin" ) << std::endl;
+    /*
+        auto clientClassService = std::make_unique<CSGO::ClientClassService>( remoteProcessService, CSGO::gClient->GetAllClasses() );
+        std::cout << std::hex << clientClassService->GetRecvPropOffset( "DT_BaseEntity", "m_vecOrigin" ) << std::endl;
+    */
 
     auto hooksService = std::make_unique<CLI::HooksService>( remoteProcessService, remoteFuntionService );
     if( !hooksService->Register<CLI::ClientHook>( CSGO::gClient->GetInstance() ) ) {
         std::cout << "failed to register clienthook." << std::endl;
         system( "pause" );
         return -3;
-    }    
+    }
 
-    while( remoteProcessService->IsValid() ) {
+    while( remoteProcessService->IsAlive() ) {
         std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
     }
 

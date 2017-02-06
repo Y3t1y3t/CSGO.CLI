@@ -14,8 +14,12 @@ namespace Memory
         if( !RemoteFunctionResolver().Resolve( functionRoutine, functionBytes ) )
             return false;
 
-        *function = std::make_unique<RemoteFunction>( _remoteProcessService, _remoteProcessService->AllocRemoteData( &functionBytes.at( 0 ), functionBytes.size() ) );
-        return (*function)->IsValidFunctionPtr();
+        LPVOID remoteFunctionBytes;
+        if( !_remoteProcessService->CreateAllocatedRemoteData( &functionBytes.at( 0 ), functionBytes.size(), &remoteFunctionBytes ) )
+            return false;
+
+        *function = std::make_unique<RemoteFunction>( _remoteProcessService, remoteFunctionBytes );
+        return true;
     }
 
     bool RemoteFunctionFactory::Create( LPTHREAD_START_ROUTINE functionRoutine, LPVOID data, size_t size, std::unique_ptr<RemoteFunction>* function ) const
@@ -23,7 +27,11 @@ namespace Memory
         if( !Create( functionRoutine, function ) )
             return false;
 
-        (*function)->SetDataPtr( _remoteProcessService->AllocRemoteData( static_cast< byte* >( data ), size ) );
-        return (*function)->IsValidDataPtr();
+        LPVOID remoteFunctionData;
+        if( !_remoteProcessService->CreateAllocatedRemoteData( static_cast< byte* >( data ), size, &remoteFunctionData ) )
+            return false;
+
+        ( *function )->SetDataPtr( remoteFunctionData );
+        return true;
     }
 }

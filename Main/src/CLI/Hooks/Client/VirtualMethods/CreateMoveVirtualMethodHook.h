@@ -15,11 +15,11 @@ namespace CLI
 
     public:
 
-        explicit CreateMoveVirtualMethodHook( Memory::SharedRemoteProcessService remoteProcessService, Memory::SharedRemoteFunctionService remoteFunctionService );
-        ~CreateMoveVirtualMethodHook();
+        explicit                     CreateMoveVirtualMethodHook( Memory::SharedRemoteProcessService remoteProcessService, Memory::SharedRemoteFunctionService remoteFunctionService );
+                                    ~CreateMoveVirtualMethodHook();
 
-        static inline DWORD WINAPI FunctionCallback( LPVOID paramsPtr );
-        static void __fastcall VirtualMethodCallback( void* _ecx, void*, size_t number, float input, bool active );
+        static inline DWORD WINAPI  FunctionCallback( LPVOID paramsPtr );
+        static void __fastcall      VirtualMethodCallback( void* _ecx, void*, size_t number, float input, bool active );
     };
 }
 

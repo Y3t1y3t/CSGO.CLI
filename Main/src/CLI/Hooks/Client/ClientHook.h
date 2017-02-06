@@ -3,17 +3,17 @@
 
 #pragma once
 
-#include "VirtualMethods/CreateMoveVirtualMethodHook.h"
+#include "../../../../lib/Memory/Remote/Hook/RemoteHookService.h"
 
 #include "../Base/HookBase.h"
 
-#include "../../../../lib/Memory/Remote/Hook/RemoteHookService.h"
+#include "VirtualMethods/CreateMoveVirtualMethodHook.h"
 
 namespace CLI
 {
     class ClientHook : public HookBase
     {
-        std::unique_ptr<Memory::RemoteVirtualMethodsTableHook>  _hook;
+        std::unique_ptr<Memory::RemoteVirtualMethodsTableHook>  _tabelHook;
         std::unique_ptr<CreateMoveVirtualMethodHook>            _createMove;
 
     public:

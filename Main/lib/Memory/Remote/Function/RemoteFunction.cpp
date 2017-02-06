@@ -12,11 +12,11 @@ namespace Memory
     RemoteFunction::~RemoteFunction()
     {
         if( _functionPtr != nullptr ) {
-            _remoteProcessService->DeallocRemoteData( _functionPtr );
+            _remoteProcessService->FreeAllocatedRemoteData( _functionPtr );
             _functionPtr = nullptr;
         }
         if( _dataPtr != nullptr ) {
-            _remoteProcessService->DeallocRemoteData( _dataPtr );
+            _remoteProcessService->FreeAllocatedRemoteData( _dataPtr );
             _dataPtr = nullptr;
         }
     }

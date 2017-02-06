@@ -3,10 +3,10 @@
 
 #pragma once
 
+#include "../../Process/RemoteProcessService.h"
+
 #include "RemoteVirtualMethodsTableHook.h"
 #include "RemoteVirtualMethodsResolver.h"
-
-#include "../../Process/RemoteProcessService.h"
 
 #include <vector>
 #include <iostream>
@@ -29,7 +29,7 @@ namespace Memory
     private:
 
         template <class T>
-        LPVOID CreateSharedData( const uintptr_t& virtualMethodsTablePtr, HANDLE sharedOriginProcessHandle, std::vector<uintptr_t>& virtualMethods ) const;
+        bool CreateSharedData( const uintptr_t& virtualMethodsTablePtr, HANDLE sharedOriginProcessHandle, const std::vector<uintptr_t>& virtualMethods, LPVOID* sharedDataPtr ) const;
     };
 
     template <typename T>
@@ -39,8 +39,8 @@ namespace Memory
         if( !_remoteVirtualMethodsResolver->Resolve( virtualMethodsTablePtr, &virtualMethods ) )
             return false;
 
-        auto sharedDataPtr = CreateSharedData<T>( virtualMethodsTablePtr, sharedOriginProcessHandle, virtualMethods );
-        if( sharedDataPtr == nullptr )
+        LPVOID sharedDataPtr;
+        if( !CreateSharedData<T>( virtualMethodsTablePtr, sharedOriginProcessHandle, virtualMethods, &sharedDataPtr ) )
             return false;
 
         *hook = std::make_unique<RemoteVirtualMethodsTableHook>( _remoteProcessService, virtualMethodsTablePtr, virtualMethods, reinterpret_cast< uintptr_t >( sharedDataPtr ), sizeof( T ) );
@@ -48,7 +48,7 @@ namespace Memory
     }
 
     template <typename T>
-    LPVOID RemoteVirtualMethodsTableHookFactory::CreateSharedData( const uintptr_t& virtualMethodsTablePtr, HANDLE sharedOriginProcessHandle, std::vector<uintptr_t>& virtualMethods ) const
+    bool RemoteVirtualMethodsTableHookFactory::CreateSharedData( const uintptr_t& virtualMethodsTablePtr, HANDLE sharedOriginProcessHandle, const std::vector<uintptr_t>& virtualMethods, LPVOID* sharedDataPtr ) const
     {
         auto virtualMethodsSize = virtualMethods.size() * sizeof( uintptr_t );
         auto sharedDataObjSize = sizeof( T );
@@ -63,7 +63,7 @@ namespace Memory
         auto virtualMethodsPtr = reinterpret_cast< uintptr_t >( remoteSharedDataPtr ) + sharedDataObjSize;
         std::memcpy( reinterpret_cast< void* >( virtualMethodsPtr ), &virtualMethods.at( 0 ), virtualMethodsSize );
 
-        return _remoteProcessService->AllocRemoteData( remoteSharedDataPtr, remoteSharedDataSize );
+        return _remoteProcessService->CreateAllocatedRemoteData( remoteSharedDataPtr, remoteSharedDataSize, sharedDataPtr );
     }
 }
 

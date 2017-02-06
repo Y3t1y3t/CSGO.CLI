@@ -33,9 +33,11 @@ Used as an folder for stuff that can and should be reused. Current features:
 	* Process
 		* Attaching to an external process via window or processname
 		* Sharing handles between the attached process
-		* Basic read/write
+		* Basic read / write
 		* Allocating Data/Deallocating Data
-		* Starting Remotethreads
+		* Creating RemoteThreads
+		* Thread resuming / suspending
+		* Iterating modules
 
 The source ( \src )
 ----------------

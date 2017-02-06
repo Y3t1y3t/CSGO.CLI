@@ -25,7 +25,7 @@ namespace CLI
     public:
 
         HooksService( Memory::SharedRemoteProcessService remoteProcessService,
-               Memory::SharedRemoteFunctionService remoteFunctionService );
+                      Memory::SharedRemoteFunctionService remoteFunctionService );
         ~HooksService();
 
         template<class T>

@@ -3,21 +3,18 @@
 
 #pragma once
 
-#include "RemoteProcessParamsDto.h"
+#include <windows.h>
 
 namespace Memory
 {
-    class RemoteProcessDto : public RemoteProcessParamsDto
+    class RemoteProcessDto
     {
     public:
+        RemoteProcessDto( DWORD processId, HANDLE processHandle );
+        ~RemoteProcessDto() = default;
+
         DWORD       Id;
         HANDLE      Handle;
-
-        explicit    RemoteProcessDto( RemoteProcessParamsDto dto );
-                    ~RemoteProcessDto();
-
-        bool        IsValid() const;
-        void        Invalidate();
     };
 }
 

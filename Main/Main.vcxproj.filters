@@ -105,16 +105,19 @@
     <ClCompile Include="src\CSGO\ClientClass\Dtos\RecvTableDto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lib\Memory\Remote\Process\Dtos\RemoteProcessParamsDto.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="lib\Memory\Remote\Process\Dtos\RemoteProcessDto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lib\Memory\Remote\Process\Providers\RemoteProcessHandleProvider.cpp">
+    <ClCompile Include="lib\Memory\Remote\Process\Factories\RemoteProcessDtoFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lib\Memory\Remote\Process\Providers\RemoteProcessIdProvider.cpp">
+    <ClCompile Include="lib\Memory\Remote\Process\Factories\RemoteProcessModuleDtoFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Process\Dtos\RemoteProcessModuleDto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Process\Providers\RemoteProcessThreadsProvider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -218,19 +221,22 @@
     <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoPtrArrayMember.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Memory\Remote\Process\Dtos\RemoteProcessParamsDto.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="lib\Memory\Remote\Process\Dtos\RemoteProcessDto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\Memory\Remote\Process\Consts\RemoteProcessConsts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Memory\Remote\Process\Providers\RemoteProcessHandleProvider.h">
+    <ClInclude Include="lib\Memory\Remote\Process\Factories\RemoteProcessDtoFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Memory\Remote\Process\Providers\RemoteProcessIdProvider.h">
+    <ClInclude Include="lib\Memory\Remote\Process\Factories\RemoteProcessModuleDtoFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Process\Dtos\RemoteProcessModuleDto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Process\Providers\RemoteProcessThreadsProvider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

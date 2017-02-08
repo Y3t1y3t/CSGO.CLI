@@ -15,7 +15,7 @@ Used as a folder for stuff that can and should be reused. Current features:
 
 * Remote
 	* Dto
-		* Layouting an dto
+		* Layouting a dto
 		* Reading in one call from attached process
 		* Subleveling
 	* Function

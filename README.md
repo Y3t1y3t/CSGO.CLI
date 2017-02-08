@@ -11,7 +11,7 @@ Well, it's a CLI for CSGO.
 The library ( \lib )
 --------------------
 
-Used as an folder for stuff that can and should be reused. Current features:
+Used as a folder for stuff that can and should be reused. Current features:
 
 * Remote
 	* Dto

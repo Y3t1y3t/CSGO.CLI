@@ -14,7 +14,7 @@ int main()
     auto remoteProcessService = std::make_shared<Memory::RemoteProcessService>();
     auto remoteFuntionService = std::make_shared<Memory::RemoteFunctionService>( remoteProcessService );
 
-    if( !remoteProcessService->Attach("csgo.exe", "Counter-Strike: Global Offensive" ) ) {
+    if( !remoteProcessService->Attach( "csgo.exe", "Counter-Strike: Global Offensive" ) ) {
         std::cout << "failed to attach." << std::endl;
         system( "pause" );
         return -1;

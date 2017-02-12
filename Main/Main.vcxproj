@@ -91,6 +91,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="lib\Memory\PatternResolver.cpp" />
     <ClCompile Include="lib\Memory\Remote\Dto\Member\Base\RemoteDtoMemberBase.cpp" />
     <ClCompile Include="lib\Memory\Remote\Dto\RemoteDtoMemberResolver.cpp" />
     <ClCompile Include="lib\Memory\Remote\Function\RemoteFunction.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="lib\Memory\Remote\Process\RemoteProcessService.cpp" />
     <ClCompile Include="lib\Memory\Remote\Dto\Base\RemoteDtoBase.cpp" />
     <ClCompile Include="lib\Memory\Remote\Process\Providers\RemoteProcessThreadsProvider.cpp" />
+    <ClCompile Include="lib\Memory\Remote\Process\Resolvers\RemoteProcessPatternResolver.cpp" />
     <ClCompile Include="src\CLI\Hooks\Client\ClientHook.cpp" />
     <ClCompile Include="src\CLI\Hooks\Client\SharedData\ClientHookSharedData.cpp" />
     <ClCompile Include="src\CLI\Hooks\Client\VirtualMethods\CreateMoveVirtualMethodHook.cpp" />
@@ -132,6 +134,8 @@
     <ClCompile Include="src\CSGO\Interfaces\InterfacesService.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="lib\Macros\FlagEnum.h" />
+    <ClInclude Include="lib\Memory\PatternResolver.h" />
     <ClInclude Include="lib\Memory\Remote\Dto\Member\Base\RemoteDtoMemberBase.h" />
     <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoPtrArrayMember.h" />
     <ClInclude Include="lib\Memory\Remote\Dto\Member\RemoteDtoPtrMember.h" />
@@ -156,9 +160,12 @@
     <ClInclude Include="lib\Memory\Remote\Process\Dtos\RemoteProcessModuleDto.h" />
     <ClInclude Include="lib\Memory\Remote\Process\Factories\RemoteProcessDtoFactory.h" />
     <ClInclude Include="lib\Memory\Remote\Process\Factories\RemoteProcessModuleDtoFactory.h" />
+    <ClInclude Include="lib\Memory\Remote\Process\Enums\RemotePatternType.h" />
     <ClInclude Include="lib\Memory\Remote\Process\RemoteProcessService.h" />
     <ClInclude Include="lib\Memory\Remote\Dto\Base\RemoteDtoBase.h" />
     <ClInclude Include="lib\Memory\Remote\Process\Providers\RemoteProcessThreadsProvider.h" />
+    <ClInclude Include="lib\Memory\Remote\Process\Resolvers\RemoteProcessPatternResolver.h" />
+    <ClInclude Include="lib\Util\String.h" />
     <ClInclude Include="src\CLI\Hooks\Client\ClientHook.h" />
     <ClInclude Include="src\CLI\Hooks\Client\SharedData\ClientHookSharedData.h" />
     <ClInclude Include="src\CLI\Hooks\Client\VirtualMethods\CreateMoveVirtualMethodHook.h" />

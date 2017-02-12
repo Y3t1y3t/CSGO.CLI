@@ -10,6 +10,7 @@ namespace Memory
         _remoteProcessDtoFactory( std::make_unique<RemoteProcessDtoFactory>() ),
         _remoteProcessModuleDtoFactory( std::make_unique<RemoteProcessModuleDtoFactory>() ),
         _remoteProcessThreadsProvider( std::make_unique<RemoteProcessThreadsProvider>() ),
+        _remoteProcessPatternResolver( std::make_unique<RemoteProcessPatternResolver>( [ & ] ( const uintptr_t& address, LPVOID outPtr, const size_t& size ) -> bool { return Read( address, outPtr, size ); } ) ), // TODO: FIX THIS FFS
         _process( nullptr )
     {
     }
@@ -129,6 +130,19 @@ namespace Memory
             return false;
 
         return DuplicateHandle( handle, handle, _process->Handle, duplicatedHandlePtr, accessRights, FALSE, NULL ) != FALSE;
+    }
+
+    bool RemoteProcessService::ResolvePattern( const std::unique_ptr<RemoteProcessModuleDto>& module,
+                                               const std::string& pattern,
+                                               uintptr_t* resultPtr,
+                                               RemotePatternType patternType,
+                                               uintptr_t patternOffset,
+                                               uintptr_t resultOffset ) const
+    {
+        if( !_process )
+            return false;
+
+        return _remoteProcessPatternResolver->Resolve( module, pattern, patternType, patternOffset, resultOffset, resultPtr );
     }
 
     bool RemoteProcessService::Read( const uintptr_t& address, LPVOID outPtr, const size_t& size ) const

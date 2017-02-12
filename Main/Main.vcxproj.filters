@@ -132,6 +132,12 @@
     <ClCompile Include="src\CLI\Hooks\EngineVGui\EngineVGuiHook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lib\Memory\PatternResolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Memory\Remote\Process\Resolvers\RemoteProcessPatternResolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\Memory\Remote\Function\RemoteFunction.h">
@@ -261,6 +267,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CLI\Hooks\EngineVGui\EngineVGuiHook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Util\String.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\PatternResolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Process\Enums\RemotePatternType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Macros\FlagEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Memory\Remote\Process\Resolvers\RemoteProcessPatternResolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

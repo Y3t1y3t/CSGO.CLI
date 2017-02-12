@@ -8,10 +8,13 @@
 #include "Dtos/RemoteProcessDto.h"
 #include "Dtos/RemoteProcessModuleDto.h"
 
+#include "Enums/RemotePatternType.h"
+
 #include "Factories/RemoteProcessDtoFactory.h"
 #include "Factories/RemoteProcessModuleDtoFactory.h"
 
 #include "Providers/RemoteProcessThreadsProvider.h"
+#include "Resolvers/RemoteProcessPatternResolver.h"
 
 #include <windows.h>
 #include <memory>
@@ -23,6 +26,7 @@ namespace Memory
         std::unique_ptr<RemoteProcessDtoFactory>        _remoteProcessDtoFactory;
         std::unique_ptr<RemoteProcessModuleDtoFactory>  _remoteProcessModuleDtoFactory;
         std::unique_ptr<RemoteProcessThreadsProvider>   _remoteProcessThreadsProvider;
+        std::unique_ptr<RemoteProcessPatternResolver>   _remoteProcessPatternResolver;
         std::unique_ptr<RemoteProcessDto>               _process;
 
     public:
@@ -35,7 +39,7 @@ namespace Memory
                                             const std::string& windowClassName = std::string(),
                                             DWORD accessRigths = RemoteProcessConsts::AccessRights );
         void                        Detach();
-        
+
         void                        Suspend() const;
         void                        Resume() const;
 
@@ -46,6 +50,13 @@ namespace Memory
 
         bool                        CreateRemoteThread( LPVOID entryPoint, LPVOID dataPtr, HANDLE* threadHandlePtr ) const;
         bool                        CreateSharedHandle( HANDLE handle, DWORD accessRights, HANDLE* duplicatedHandlePtr ) const;
+
+        bool                        ResolvePattern( const std::unique_ptr<RemoteProcessModuleDto>& module,
+                                                    const std::string& pattern,
+                                                    uintptr_t* resultPtr,
+                                                    RemotePatternType patternType = RemotePatternType::Absolute,
+                                                    uintptr_t patternOffset = 0x0,
+                                                    uintptr_t resultOffset = 0x0 ) const;
 
         bool                        Read( const uintptr_t& address, LPVOID out, const size_t& size ) const;
         template<class T> bool      Read( LPCVOID address, T* outPtr ) const;
